@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlternaPro — LE site de l'alternance</title>
+<style>
+:root{
+  --indigo:#dc2626; --indigo-d:#b91c1c; --indigo-dd:#991b1b; --violet:#f43f5e;
+  --ink:#450a0a; --ink2:#7f1d1d;
+  --text:#0f172a; --muted:#64748b; --soft:#94a3b8;
+  --bg:#fafaf9; --card:#ffffff; --line:#e7e5e4; --line2:#f1f0ef;
+  --green-bg:#dcfce7; --green:#15803d;
+  --blue-bg:#dbeafe; --blue:#1d4ed8;
+  --orange-bg:#fff7ed; --orange:#c2410c;
+  --red-bg:#fee2e2; --red:#dc2626;
+  --purple-bg:#fee2e2; --purple:#b91c1c;
+  --grad:linear-gradient(135deg,#dc2626 0%,#f43f5e 100%);
+  --shadow:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);
+  --shadow-lg:0 10px 30px rgba(220,38,38,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ===== TOP NAV ===== */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-inner{display:flex;align-items:center;gap:14px;height:62px;max-width:1200px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;color:var(--indigo-d);cursor:pointer;white-space:nowrap}
+.brand .logo{width:32px;height:30px;background:transparent;display:flex;align-items:center;justify-content:center}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:4px}
+.nav-links a{padding:8px 11px;font-size:14px;font-weight:600;color:var(--muted);border-radius:8px;transition:.18s;white-space:nowrap}
+.nav-links a:hover{background:var(--bg);color:var(--text)}
+.nav-links a.active{color:var(--indigo-d);background:var(--purple-bg)}
+.nav-spacer{flex:1}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{border:none;border-radius:9px;font-weight:600;font-size:14px;padding:9px 16px;transition:.18s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn-ghost{background:transparent;color:var(--text)}
+.btn-ghost:hover{background:var(--bg)}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 2px 8px rgba(244,63,94,.3)}
+.btn-primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn-outline{background:#fff;color:var(--indigo-d);border:1.5px solid var(--indigo)}
+.btn-outline:hover{background:var(--purple-bg)}
+.btn-sm{padding:6px 12px;font-size:13px}
+.btn-block{width:100%;justify-content:center}
+.user-chip{display:flex;align-items:center;gap:8px;background:var(--purple-bg);border:1px solid #fecaca;border-radius:20px;padding:4px 12px 4px 4px;font-size:13px;font-weight:700;color:var(--indigo-d);cursor:pointer}
+.user-chip .avatar{width:26px;height:26px;font-size:11px}
+.burger{display:none;flex-direction:column;gap:4px;background:none;border:none;padding:8px}
+.burger span{width:22px;height:2px;background:var(--text);border-radius:2px}
+
+/* ===== PAGES ===== */
+.page{display:none;animation:fade .25s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ===== HERO ===== */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;top:-120px;right:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(139,92,246,.5),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:70px 20px 60px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero h1{font-size:42px;line-height:1.12;font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+.hero h1 .hl{background:linear-gradient(120deg,#fca5a5,#c4b5fd);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:17px;color:#fecaca;max-width:520px;margin-bottom:26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.hero-actions .btn{padding:13px 22px;font-size:15px}
+.hero-trust{display:flex;align-items:center;gap:18px;color:#fca5a5;font-size:13px;flex-wrap:wrap}
+.hero-trust b{color:#fff}
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:18px;backdrop-filter:blur(8px)}
+.hero-search{background:#fff;border-radius:14px;padding:14px;box-shadow:var(--shadow-lg)}
+.hero-search-row{display:flex;gap:8px;margin-bottom:10px}
+.hero-search input,.hero-search select{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:9px;padding:11px 12px;font-size:14px;color:var(--text);background:#fff}
+.hero-search input:focus,.hero-search select:focus{outline:none;border-color:var(--indigo)}
+.hero-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.hero-chip{font-size:12px;background:var(--bg);color:var(--muted);padding:5px 10px;border-radius:20px;cursor:pointer;border:1px solid var(--line)}
+.hero-chip:hover{background:var(--purple-bg);color:var(--indigo-d)}
+
+/* ===== STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:-32px auto 0;position:relative;z-index:2;max-width:1000px;padding:0 20px}
+.stat{background:#fff;border-radius:14px;padding:20px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--line2)}
+.stat .n{font-size:28px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat .l{font-size:13px;color:var(--muted);margin-top:2px}
+
+/* ===== SECTIONS ===== */
+.section{padding:64px 0}
+.section-head{text-align:center;max-width:640px;margin:0 auto 40px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;color:var(--indigo-d);background:var(--purple-bg);padding:5px 12px;border-radius:20px;margin-bottom:14px}
+.section-head h2{font-size:32px;font-weight:800;letter-spacing:-.5px;margin-bottom:12px}
+.section-head p{font-size:16px;color:var(--muted)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;transition:.2s}
+.feature:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:transparent}
+.feature .ic{width:50px;height:50px;border-radius:13px;background:var(--purple-bg);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
+.feature h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.feature p{font-size:14px;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+.step{text-align:center;padding:10px}
+.step .num{counter-increment:s;width:48px;height:48px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.step .num::before{content:counter(s)}
+.step h4{font-size:17px;font-weight:700;margin-bottom:8px}
+.step p{font-size:14px;color:var(--muted)}
+.section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.plan{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;position:relative}
+.plan.pop{border:2px solid var(--indigo);box-shadow:var(--shadow-lg)}
+.plan .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px}
+.plan h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.plan .desc{font-size:13px;color:var(--muted);margin-bottom:16px}
+.plan .price{font-size:38px;font-weight:800;letter-spacing:-1px}
+.plan .price span{font-size:15px;font-weight:500;color:var(--muted)}
+.plan ul{list-style:none;margin:18px 0}
+.plan li{font-size:14px;color:var(--text);padding:7px 0;display:flex;gap:9px;align-items:flex-start}
+.plan li .ck{color:var(--green);font-weight:800;flex-shrink:0}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--ink);color:#fecaca;padding:50px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;margin-bottom:34px}
+.footer .brand{color:#fff;margin-bottom:12px}
+.footer p{font-size:14px;color:#fca5a5;max-width:300px}
+.footer h5{color:#fff;font-size:14px;font-weight:700;margin-bottom:14px}
+.footer ul{list-style:none}
+.footer li{margin-bottom:9px}
+.footer li a{font-size:14px;color:#fca5a5;transition:.15s;cursor:pointer}
+.footer li a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#f87171}
+
+/* ===== APP / DASHBOARD ===== */
+.app{display:flex;min-height:calc(100vh - 62px)}
+.sidebar{width:236px;flex-shrink:0;background:var(--ink);padding:18px 0;display:flex;flex-direction:column}
+.side-user{display:flex;align-items:center;gap:11px;padding:6px 18px 18px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:10px}
+.side-user .avatar{width:40px;height:40px}
+.side-user .nm{color:#fff;font-weight:700;font-size:14px}
+.side-user .rl{color:#fca5a5;font-size:12px}
+.side-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#f87171;padding:14px 18px 6px;font-weight:700}
+.side-item{display:flex;align-items:center;gap:12px;padding:10px 18px;color:#fecaca;font-size:14px;font-weight:500;cursor:pointer;border-left:3px solid transparent;transition:.15s}
+.side-item:hover{background:rgba(244,63,94,.16);color:#fff}
+.side-item.active{background:rgba(244,63,94,.22);color:#fff;border-left-color:var(--violet);font-weight:600}
+.side-item .em{font-size:17px;width:22px;text-align:center}
+.side-item .badge-n{margin-left:auto;background:var(--violet);color:#fff;font-size:11px;font-weight:700;padding:1px 7px;border-radius:10px}
+.main{flex:1;padding:26px 30px;overflow-x:hidden;min-width:0}
+.main-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.main-head h1{font-size:24px;font-weight:800;letter-spacing:-.4px}
+.main-head .sub{font-size:14px;color:var(--muted);margin-top:3px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.kpi .n{font-size:26px;font-weight:800}
+.kpi .l{font-size:13px;color:var(--muted);margin-top:2px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-2.wide{grid-template-columns:1.4fr 1fr}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:18px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.panel-head h3{font-size:16px;font-weight:700}
+.panel-head .link{font-size:13px;font-weight:600;color:var(--indigo-d);cursor:pointer}
+.panel-head .link:hover{text-decoration:underline}
+.badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;display:inline-block}
+.b-green{background:var(--green-bg);color:var(--green)}
+.b-blue{background:var(--blue-bg);color:var(--blue)}
+.b-orange{background:var(--orange-bg);color:var(--orange)}
+.b-red{background:var(--red-bg);color:var(--red)}
+.b-purple{background:#fef3c7;color:#b45309}
+.b-gray{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.row-item{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid var(--line2)}
+.row-item:last-child{border-bottom:none}
+.clogo{width:42px;height:42px;border-radius:11px;background:var(--purple-bg);color:var(--indigo-d);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;border:1px solid var(--line)}
+.clogo-img{background:#fff}
+.clogo-img img{width:68%;height:68%;object-fit:contain;border-radius:5px}
+.row-main{flex:1;min-width:0}
+.row-title{font-size:14px;font-weight:700}
+.row-sub{font-size:13px;color:var(--muted);margin-top:1px}
+.match{font-size:12px;font-weight:800;color:var(--green);background:var(--green-bg);padding:3px 9px;border-radius:7px;white-space:nowrap}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}
+.progress{height:7px;background:var(--bg);border-radius:5px;overflow:hidden;margin-top:7px}
+.progress > i{display:block;height:100%;background:var(--grad);border-radius:5px;transition:width .3s}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{font-size:12px;font-weight:600;background:var(--purple-bg);color:var(--indigo-d);border:1px solid #fecaca;padding:4px 11px;border-radius:20px;display:inline-flex;align-items:center;gap:6px}
+.chip .x{cursor:pointer;font-weight:800;opacity:.6}
+.chip .x:hover{opacity:1}
+.cv-zone{border:2px dashed var(--line);border-radius:13px;padding:18px;text-align:center;transition:.15s}
+.cv-zone:hover{border-color:var(--indigo)}
+.cv-file{display:flex;align-items:center;gap:12px;background:var(--purple-bg);border:1px solid #fecaca;border-radius:12px;padding:12px 14px}
+.cv-file .ic{font-size:26px}
+.cv-file .nm{font-size:14px;font-weight:700;color:var(--ink2)}
+.cv-file .meta{font-size:12px;color:var(--muted)}
+.empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty .em{font-size:42px;display:block;margin-bottom:12px}
+.empty b{color:var(--text)}
+.gate{max-width:520px;margin:60px auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:40px;text-align:center;box-shadow:var(--shadow-lg)}
+.gate .em{font-size:52px;display:block;margin-bottom:16px}
+.gate h2{font-size:24px;font-weight:800;margin-bottom:10px}
+.gate p{font-size:15px;color:var(--muted);margin-bottom:24px}
+.gate .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* ===== SEARCH ===== */
+.search-hero{background:#fff;border-bottom:1px solid var(--line);padding:46px 0 26px;text-align:center}
+.search-hero h1{font-size:38px;font-weight:800;letter-spacing:-.9px;margin-bottom:6px}
+.search-hero .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sh-sub{font-size:14px;color:var(--muted);margin-bottom:22px}
+.sh-sub b{color:var(--indigo-d)}
+.sh-bar{max-width:780px;margin:0 auto 16px}
+.searchbar{display:flex;gap:10px;flex-wrap:wrap}
+.searchbar .field{flex:1;min-width:160px;position:relative}
+.searchbar .field .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.6}
+.searchbar input,.searchbar select{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 12px 12px 36px;font-size:14px;background:#fff;color:var(--text)}
+.searchbar select{appearance:none;cursor:pointer}
+.searchbar input:focus,.searchbar select:focus{outline:none;border-color:var(--indigo)}
+.search-layout{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:24px 0}
+.filters{position:sticky;top:78px;align-self:start}
+.fcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.fcard h4{font-size:14px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.fgroup{padding:14px 0;border-bottom:1px solid var(--line2)}
+.fgroup:last-child{border:none;padding-bottom:0}
+.fgroup .ftitle{font-size:13px;font-weight:700;margin-bottom:9px}
+.fopt{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);padding:4px 0;cursor:pointer}
+.fopt input{width:16px;height:16px;accent-color:var(--indigo);cursor:pointer}
+.frange{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.frange input[type=range]{flex:1;accent-color:var(--indigo)}
+.fselect{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:9px;font-size:13px;background:#fff;cursor:pointer}
+.results-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.results-bar .cnt{font-size:14px;color:var(--muted)}
+.results-bar .cnt b{color:var(--text)}
+.offer{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;transition:.18s;cursor:pointer}
+.offer:hover{box-shadow:var(--shadow-lg);border-color:#fecaca}
+.offer-top{display:flex;gap:14px}
+.offer .clogo{width:52px;height:52px;font-size:15px}
+.offer-body{flex:1;min-width:0}
+.offer-titlerow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.offer h3{font-size:17px;font-weight:700;line-height:1.25}
+.offer .co{font-size:14px;color:var(--muted);margin-top:2px}
+.offer .co b{color:var(--indigo-d);font-weight:700}
+.offer-meta{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.ometa{font-size:13px;color:var(--text);display:inline-flex;align-items:center;gap:5px}
+.offer .summary{font-size:14px;color:var(--muted);margin-bottom:12px}
+.sector-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.stag{font-size:12px;font-weight:600;background:var(--purple-bg);color:var(--indigo-d);padding:3px 10px;border-radius:7px}
+.source-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;display:inline-flex;align-items:center;gap:5px}
+.src-hw{background:#fff0e9;color:#e0531f}
+.src-li{background:#e8f1fb;color:#0a66c2}
+.src-in{background:#e8eefc;color:#2557a7}
+.src-wttj{background:#fdf6e3;color:#b58a00}
+.src-ap{background:var(--purple-bg);color:var(--indigo-d)}
+.offer-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line2);flex-wrap:wrap}
+.salary{font-size:16px;font-weight:800}
+.salary span{font-size:12px;font-weight:500;color:var(--muted);display:block}
+.offer-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ===== FICHE ===== */
+.fiche-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+.fiche-head h1{font-size:24px;font-weight:800}
+.steps-bar{display:flex;margin:24px 0 28px}
+.sstep{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.sstep:not(:last-child)::after{content:"";position:absolute;top:18px;left:60%;right:-40%;height:3px;background:var(--line);border-radius:2px}
+.sstep.done:not(:last-child)::after{background:var(--indigo)}
+.scircle{width:38px;height:38px;border-radius:50%;border:2.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--muted);z-index:1}
+.sstep.active .scircle{border-color:var(--indigo);color:var(--indigo-d);background:var(--purple-bg)}
+.sstep.done .scircle{background:var(--indigo);border-color:var(--indigo);color:#fff}
+.slabel{font-size:12px;color:var(--muted);text-align:center;font-weight:600}
+.sstep.active .slabel{color:var(--indigo-d)}
+.sstep.done .slabel{color:var(--text)}
+.fsection{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.fsec-head{display:flex;align-items:center;gap:13px;padding-bottom:14px;border-bottom:1px solid var(--line2);margin-bottom:16px}
+.fsec-ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.fsec-ic.p{background:var(--purple-bg)} .fsec-ic.b{background:var(--blue-bg)} .fsec-ic.g{background:var(--green-bg)} .fsec-ic.o{background:var(--orange-bg)}
+.fsec-head .ttl{font-size:16px;font-weight:700}
+.fsec-head .st{font-size:12px;color:var(--muted)}
+.fsec-head .status{margin-left:auto}
+.fform{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:12px;font-weight:600;color:var(--muted)}
+.fg input,.fg select,.fg textarea{border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font-size:14px;background:#fff;color:var(--text);font-family:inherit}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--indigo)}
+.fg textarea{resize:vertical;min-height:90px;line-height:1.6}
+.sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sigbox{background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:18px;text-align:center}
+.sigbox .nm{font-size:14px;font-weight:700}
+.sigbox .rl{font-size:12px;color:var(--muted);margin-bottom:14px}
+.sigpad{height:74px;border:2px dashed var(--line);border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--soft);margin-bottom:12px;flex-direction:column;gap:2px}
+.sigpad.signed{border:2px solid #86efac;background:var(--green-bg);color:var(--green);font-weight:600}
+.sigpad .sgn{font-family:'Brush Script MT','Segoe Script',cursive;font-size:24px;color:var(--ink2)}
+
+/* ===== MODAL / TOAST ===== */
+.overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;align-items:center;justify-content:center;padding:20px;animation:fade .2s}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:18px;width:100%;max-width:580px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:22px 24px 0}
+.modal-head h3{font-size:20px;font-weight:800}
+.modal-x{background:var(--bg);border:none;width:34px;height:34px;border-radius:9px;font-size:18px;color:var(--muted);cursor:pointer;flex-shrink:0}
+.modal-x:hover{background:var(--line)}
+.modal-body{padding:16px 24px 24px}
+.modal-foot{display:flex;gap:10px;padding:0 24px 24px;flex-wrap:wrap}
+.detail-row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:14px}
+.detail-row:last-child{border:none}
+.detail-row .k{color:var(--muted);min-width:130px;font-weight:600}
+.detail-list{margin:8px 0 0 2px;list-style:none}
+.detail-list li{font-size:14px;color:var(--text);padding:5px 0 5px 20px;position:relative}
+.detail-list li::before{content:"›";position:absolute;left:4px;color:var(--indigo);font-weight:800}
+.src-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.src-link{font-size:13px;font-weight:600;padding:7px 12px;border-radius:9px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px;background:#fff;transition:.15s}
+.src-link:hover{border-color:var(--indigo);background:var(--purple-bg)}
+.toast-wrap{position:fixed;bottom:24px;right:24px;z-index:200;display:flex;flex-direction:column;gap:10px}
+.toast{background:var(--ink);color:#fff;padding:14px 18px;border-radius:12px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);animation:slidein .3s;max-width:340px}
+.toast .em{font-size:18px}
+@keyframes slidein{from{transform:translateX(120%)}to{transform:none}}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.form-row.full{grid-template-columns:1fr}
+.flabel{font-size:13px;font-weight:600;margin-bottom:5px;display:block}
+.finput{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;background:#fff;color:var(--text)}
+.finput:focus{outline:none;border-color:var(--indigo)}
+.privacy-note{font-size:12px;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-top:14px;text-align:center}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:980px){
+  .hero-inner{grid-template-columns:1fr;gap:28px}
+  .hero h1{font-size:34px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .features,.steps,.pricing{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .grid-2,.grid-2.wide{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .search-layout{grid-template-columns:1fr}
+  .filters{position:static}
+  .sig-grid{grid-template-columns:1fr}
+  #compareStrip{grid-template-columns:1fr!important}
+}
+@media(max-width:760px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .sidebar{position:fixed;left:-260px;top:62px;bottom:0;z-index:60;transition:.25s;box-shadow:4px 0 20px rgba(0,0,0,.2)}
+  .sidebar.open{left:0}
+  .main{padding:20px 16px}
+  .fform{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .stats{margin-top:24px}
+  .section{padding:44px 0}
+  .section-head h2{font-size:26px}
+  .gate{margin:30px 16px;padding:28px 20px}
+}
+@media(max-width:480px){
+  .kpis{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:28px}
+  .offer-actions{width:100%}
+  .offer-actions .btn{flex:1;justify-content:center}
+}
+.scrim{display:none;position:fixed;inset:62px 0 0 0;background:rgba(0,0,0,.4);z-index:55}
+.scrim.open{display:block}
+@media(min-width:761px){.scrim{display:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ===================== TOP NAV ===================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="burger" onclick="toggleSidebar()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="brand" onclick="go('search',navEl('search'))"><span class="logo"><svg viewBox="0 0 64 60" width="30" height="28" aria-label="Mascotte grenouille AlternaPro"><circle cx="19" cy="13" r="10" fill="#4ade80"/><circle cx="45" cy="13" r="10" fill="#4ade80"/><ellipse cx="32" cy="36" rx="24" ry="20" fill="#4ade80"/><ellipse cx="32" cy="44" rx="13" ry="9" fill="#bbf7d0"/><circle cx="19" cy="12" r="6" fill="#fff"/><circle cx="20.5" cy="12.5" r="3" fill="#27272a"/><circle cx="45" cy="12" r="6" fill="#fff"/><circle cx="43.5" cy="12.5" r="3" fill="#27272a"/><path d="M21 38 Q32 47 43 38" stroke="#166534" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="13" cy="36" r="3.4" fill="#fb7185" opacity=".75"/><circle cx="51" cy="36" r="3.4" fill="#fb7185" opacity=".75"/></svg></span>AlternaPro</div>
+    <nav class="nav-links">
+      <a href="#" class="active" data-nav="search" onclick="go('search',this);return false">Rechercher</a>
+      <a href="#" data-nav="student" onclick="go('student',this);return false">Espace étudiant</a>
+      <a href="#" data-nav="recruiter" onclick="go('recruiter',this);return false">Espace recruteur</a>
+      <a href="#" data-nav="school" onclick="go('school',this);return false">Espace école</a>
+      <a href="#" data-nav="fiche" onclick="go('fiche',this);return false">Fiche de mission</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-cta" id="navAuth"></div>
+  </div>
+</header>
+<div class="scrim" id="scrim" onclick="toggleSidebar()"></div>
+
+<!-- ===================== RECHERCHE (page d'accueil) ===================== -->
+<main id="page-search" class="page active">
+  <div class="search-hero">
+    <div class="container">
+      <h1><svg viewBox="0 0 64 60" width="54" height="50" style="vertical-align:-9px;margin-right:12px" aria-hidden="true"><circle cx="19" cy="13" r="10" fill="#4ade80"/><circle cx="45" cy="13" r="10" fill="#4ade80"/><ellipse cx="32" cy="36" rx="24" ry="20" fill="#4ade80"/><ellipse cx="32" cy="44" rx="13" ry="9" fill="#bbf7d0"/><circle cx="19" cy="12" r="6" fill="#fff"/><circle cx="20.5" cy="12.5" r="3" fill="#27272a"/><circle cx="45" cy="12" r="6" fill="#fff"/><circle cx="43.5" cy="12.5" r="3" fill="#27272a"/><path d="M21 38 Q32 47 43 38" stroke="#166534" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="13" cy="36" r="3.4" fill="#fb7185" opacity=".75"/><circle cx="51" cy="36" r="3.4" fill="#fb7185" opacity=".75"/></svg>Bondissez vers votre <span class="hl">alternance</span></h1>
+      <div class="sh-sub"><b id="statOffers">—</b> offres en ligne · <b id="statCompanies">—</b> entreprises · <b id="statStudents">—</b> candidats inscrits · gratuit pour postuler</div>
+      <div class="searchbar sh-bar">
+        <div class="field"><span class="ic">🔍</span><input type="text" id="sKeyword" placeholder="Métier, compétence, entreprise..." oninput="renderOffers()"></div>
+        <div class="field" style="flex:0 1 230px;min-width:170px"><span class="ic">📍</span><select id="sCity" onchange="renderOffers()"><option value="">Toutes les villes</option></select></div>
+        <button class="btn btn-primary" style="padding:12px 24px" onclick="renderOffers()">Rechercher</button>
+      </div>
+      <div class="hero-chips" style="justify-content:center">
+        <span class="hero-chip" onclick="quickSearch('Marketing')">Marketing</span>
+        <span class="hero-chip" onclick="quickSearch('Développeur')">Développement</span>
+        <span class="hero-chip" onclick="quickSearch('Finance')">Finance</span>
+        <span class="hero-chip" onclick="quickSearch('Commerce')">Commerce</span>
+        <span class="hero-chip" onclick="quickSearch('RH')">RH</span>
+        <span class="hero-chip" onclick="quickSearch('Cybersécurité')">Cybersécurité</span>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="search-layout">
+      <aside class="filters">
+        <div class="fcard">
+          <h4>🎛️ Filtres avancés</h4>
+          <div class="fgroup">
+            <div class="ftitle">Secteur</div>
+            <select class="fselect" id="sSector" onchange="renderOffers()"><option value="">Tous les secteurs</option></select>
+          </div>
+          <div class="fgroup">
+            <div class="ftitle">Type de contrat</div>
+            <label class="fopt"><input type="checkbox" class="fContract" value="Apprentissage" checked onchange="renderOffers()"> Contrat d'apprentissage</label>
+            <label class="fopt"><input type="checkbox" class="fContract" value="Professionnalisation" checked onchange="renderOffers()"> Contrat de professionnalisation</label>
+          </div>
+          <div class="fgroup">
+            <div class="ftitle">Niveau requis</div>
+            <select class="fselect" id="fLevel" onchange="renderOffers()">
+              <option value="">Tous niveaux</option>
+              <option value="2">BAC+2 / BTS / DUT</option>
+              <option value="3">BAC+3 / Licence / Bachelor</option>
+              <option value="4">BAC+4 / Master 1</option>
+              <option value="5">BAC+5 / Master 2</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <div class="ftitle">Durée du contrat</div>
+            <select class="fselect" id="fDuration" onchange="renderOffers()">
+              <option value="">Toutes durées</option>
+              <option value="12">12 mois</option>
+              <option value="24">24 mois</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <div class="ftitle">Salaire mensuel min. : <b id="salOut" style="color:var(--indigo-d)">0 €</b></div>
+            <div class="frange"><span>0€</span><input type="range" id="fSalary" min="0" max="1600" step="100" value="0" oninput="document.getElementById('salOut').textContent=this.value+' €';renderOffers()"><span>1600€</span></div>
+          </div>
+          <div class="fgroup">
+            <div class="ftitle">Télétravail</div>
+            <label class="fopt"><input type="checkbox" class="fRemote" value="Télétravail" checked onchange="renderOffers()"> 100 % télétravail</label>
+            <label class="fopt"><input type="checkbox" class="fRemote" value="Hybride" checked onchange="renderOffers()"> Hybride</label>
+            <label class="fopt"><input type="checkbox" class="fRemote" value="Présentiel" checked onchange="renderOffers()"> Présentiel</label>
+          </div>
+          <button class="btn btn-ghost btn-block btn-sm" style="border:1px solid var(--line);margin-top:14px" onclick="resetFilters()">↺ Réinitialiser</button>
+        </div>
+      </aside>
+      <div>
+        <div class="results-bar">
+          <div class="cnt"><b id="resCount">0</b> offres trouvées · <span id="resCity">toutes villes</span></div>
+          <select class="fselect" style="width:auto" id="sortBy" onchange="renderOffers()">
+            <option value="match">Trier : Pertinence</option>
+            <option value="salary">Salaire décroissant</option>
+            <option value="recent">Plus récentes</option>
+          </select>
+        </div>
+        <div id="offerList"></div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="brand"><span class="logo"><svg viewBox="0 0 64 60" width="30" height="28" aria-label="Mascotte grenouille AlternaPro"><circle cx="19" cy="13" r="10" fill="#4ade80"/><circle cx="45" cy="13" r="10" fill="#4ade80"/><ellipse cx="32" cy="36" rx="24" ry="20" fill="#4ade80"/><ellipse cx="32" cy="44" rx="13" ry="9" fill="#bbf7d0"/><circle cx="19" cy="12" r="6" fill="#fff"/><circle cx="20.5" cy="12.5" r="3" fill="#27272a"/><circle cx="45" cy="12" r="6" fill="#fff"/><circle cx="43.5" cy="12.5" r="3" fill="#27272a"/><path d="M21 38 Q32 47 43 38" stroke="#166534" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="13" cy="36" r="3.4" fill="#fb7185" opacity=".75"/><circle cx="51" cy="36" r="3.4" fill="#fb7185" opacity=".75"/></svg></span>AlternaPro</div><p>Le site pour décrocher votre alternance — étudiants, recruteurs et écoles. Vos données restent dans votre navigateur.</p></div>
+        <div><h5>Candidats</h5><ul><li><a onclick="go('student',navEl('student'))">Mon espace & mon CV</a></li><li><a onclick="go('fiche',navEl('fiche'))">Fiche de mission</a></li><li><a onclick="openAuth('signup','etudiant')">Créer un compte gratuit</a></li></ul></div>
+        <div><h5>Recruteurs & écoles</h5><ul><li><a onclick="go('recruiter',navEl('recruiter'))">Publier une offre (gratuit)</a></li><li><a onclick="go('school',navEl('school'))">Espace école / CFA</a></li><li><a onclick="openPricing()">Tarifs — 0 € d'abonnement</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 AlternaPro — Tous droits réservés</span><span>Fait avec 💜 en France</span></div>
+    </div>
+  </footer>
+</main>
+
+<!-- ===================== ESPACES (rendus par JS selon connexion) ===================== -->
+<main id="page-student" class="page"><div id="studentRoot"></div></main>
+<main id="page-recruiter" class="page"><div id="recruiterRoot"></div></main>
+<main id="page-school" class="page"><div id="schoolRoot"></div></main>
+
+<!-- ===================== FICHE DE MISSION ===================== -->
+<main id="page-fiche" class="page">
+  <div class="container" style="max-width:920px;padding-top:26px;padding-bottom:40px">
+    <div class="fiche-head">
+      <div>
+        <h1>Fiche de mission tripartite</h1>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px">Remplissez les 3 sections, faites signer les 3 parties, puis envoyez à l'école pour validation.</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <span class="badge b-gray" id="ficheStatus" style="padding:7px 12px;font-size:13px">📝 En rédaction</span>
+        <button class="btn btn-outline" onclick="exportPDF()">⬇️ Exporter en PDF</button>
+      </div>
+    </div>
+
+    <div class="steps-bar">
+      <div class="sstep active" id="fstep1"><div class="scircle">1</div><div class="slabel">Rédaction</div></div>
+      <div class="sstep" id="fstep2"><div class="scircle">2</div><div class="slabel">Signatures</div></div>
+      <div class="sstep" id="fstep3"><div class="scircle">3</div><div class="slabel">Validation école</div></div>
+    </div>
+
+    <div class="fsection">
+      <div class="fsec-head"><div class="fsec-ic p">🏢</div><div><div class="ttl">Partie entreprise</div><div class="st">À remplir par le maître d'apprentissage</div></div></div>
+      <div class="fform">
+        <div class="fg"><label>Raison sociale *</label><input id="fEntNom" placeholder="Ex : Dupont SAS"></div>
+        <div class="fg"><label>SIRET</label><input id="fEntSiret" placeholder="14 chiffres"></div>
+        <div class="fg full"><label>Adresse du lieu de travail</label><input id="fEntAdr" placeholder="Adresse complète"></div>
+        <div class="fg"><label>Maître d'apprentissage *</label><input id="fEntMaitre" placeholder="Prénom Nom — fonction"></div>
+        <div class="fg"><label>Intitulé du poste *</label><input id="fEntPoste" placeholder="Ex : Alternant(e) Marketing"></div>
+        <div class="fg"><label>Rémunération brute mensuelle</label><input id="fEntSalaire" placeholder="Ex : 1 050 €"></div>
+        <div class="fg"><label>Dates du contrat</label><input id="fEntDates" placeholder="Ex : 01/09/2026 → 31/08/2027"></div>
+        <div class="fg full"><label>Missions confiées</label><textarea id="fEntMissions" placeholder="Listez les missions principales de l'alternant(e)..."></textarea></div>
+      </div>
+    </div>
+
+    <div class="fsection">
+      <div class="fsec-head"><div class="fsec-ic b">🎓</div><div><div class="ttl">Partie école / CFA</div><div class="st">À remplir par le référent pédagogique</div></div></div>
+      <div class="fform">
+        <div class="fg"><label>Établissement *</label><input id="fEcoNom" placeholder="Nom de l'école ou du CFA"></div>
+        <div class="fg"><label>Référent pédagogique *</label><input id="fEcoRef" placeholder="Prénom Nom"></div>
+        <div class="fg"><label>Formation préparée</label><input id="fEcoFormation" placeholder="Ex : Bachelor Marketing — BAC+3"></div>
+        <div class="fg"><label>Rythme d'alternance</label><input id="fEcoRythme" placeholder="Ex : 3 j entreprise / 2 j école"></div>
+      </div>
+    </div>
+
+    <div class="fsection">
+      <div class="fsec-head"><div class="fsec-ic g">👤</div><div><div class="ttl">Partie étudiant(e)</div><div class="st" id="fEtuHint">À remplir par l'étudiant(e)</div></div></div>
+      <div class="fform">
+        <div class="fg"><label>Prénom *</label><input id="fEtuPrenom" placeholder="Prénom"></div>
+        <div class="fg"><label>Nom *</label><input id="fEtuNom" placeholder="Nom"></div>
+        <div class="fg"><label>Email</label><input id="fEtuEmail" placeholder="email@exemple.fr"></div>
+        <div class="fg"><label>Téléphone</label><input id="fEtuTel" placeholder="06 XX XX XX XX"></div>
+        <div class="fg"><label>Date de naissance</label><input id="fEtuNaissance" placeholder="JJ/MM/AAAA"></div>
+        <div class="fg"><label>Dernier diplôme obtenu</label><input id="fEtuDiplome" placeholder="Ex : BAC Général"></div>
+      </div>
+    </div>
+
+    <div class="fsection">
+      <div class="fsec-head"><div class="fsec-ic o">✍️</div><div><div class="ttl">Signatures électroniques</div><div class="st">Signature des 3 parties requise</div></div><div class="status"><span class="badge b-orange" id="sigStatus">0/3 signé</span></div></div>
+      <div class="sig-grid">
+        <div class="sigbox">
+          <div class="nm">Entreprise</div><div class="rl">Maître d'apprentissage</div>
+          <div class="sigpad" id="pad-ent">En attente de signature</div>
+          <button class="btn btn-primary btn-sm btn-block" id="btn-ent" onclick="signFiche('ent')">✍️ Signer</button>
+        </div>
+        <div class="sigbox">
+          <div class="nm">École / CFA</div><div class="rl">Référent pédagogique</div>
+          <div class="sigpad" id="pad-eco">En attente de signature</div>
+          <button class="btn btn-primary btn-sm btn-block" id="btn-eco" onclick="signFiche('eco')">✍️ Signer</button>
+        </div>
+        <div class="sigbox">
+          <div class="nm">Étudiant(e)</div><div class="rl">Alternant(e)</div>
+          <div class="sigpad" id="pad-etu">En attente de signature</div>
+          <button class="btn btn-primary btn-sm btn-block" id="btn-etu" onclick="signFiche('etu')">✍️ Signer</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 0">
+      <button class="btn btn-ghost" style="border:1px solid var(--line)" onclick="saveFicheDraft()">💾 Enregistrer le brouillon</button>
+      <button class="btn btn-primary" onclick="submitFiche()">📤 Envoyer à l'école pour validation</button>
+    </div>
+  </div>
+</main>
+
+<!-- ===================== MODAL & TOASTS ===================== -->
+<div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+<div class="toast-wrap" id="toasts"></div>
+
+<script>
+/* ╔════════════════════════════════════════════════╗
+   ║  ALTERNAPRO — vrai produit, données locales     ║
+   ║  Tout est stocké dans localStorage :            ║
+   ║  comptes, profils, CV, candidatures, offres,    ║
+   ║  fiches de mission. Aucun serveur requis.       ║
+   ╚════════════════════════════════════════════════╝ */
+
+/* ===================== STOCKAGE ===================== */
+function dbGet(k, def){ try{ const v = JSON.parse(localStorage.getItem(k)); return v===null||v===undefined ? def : v; }catch(e){ return def; } }
+function dbSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){ toast('⚠️','Stockage plein — supprimez un CV trop lourd'); } }
+
+const DB = {
+  accounts: ()=>dbGet('ap_accounts',{}),
+  saveAccounts: a=>dbSet('ap_accounts',a),
+  session: ()=>dbGet('ap_session',null),
+  setSession: e=>dbSet('ap_session',e),
+  profiles: ()=>dbGet('ap_profiles',{}),
+  saveProfiles: p=>dbSet('ap_profiles',p),
+  applications: ()=>dbGet('ap_applications',[]),
+  saveApplications: a=>dbSet('ap_applications',a),
+  saved: ()=>dbGet('ap_savedoffers',{}),
+  saveSaved: s=>dbSet('ap_savedoffers',s),
+  customOffers: ()=>dbGet('ap_customoffers',[]),
+  saveCustomOffers: o=>dbSet('ap_customoffers',o),
+  fiches: ()=>dbGet('ap_fiches',[]),
+  saveFiches: f=>dbSet('ap_fiches',f),
+};
+
+function currentUser(){
+  const e = DB.session(); if(!e) return null;
+  const a = DB.accounts()[e]; return a || null;
+}
+function getProfile(){
+  const u = currentUser(); if(!u) return {};
+  return DB.profiles()[u.email] || {skills:[]};
+}
+function saveProfile(p){
+  const u = currentUser(); if(!u) return;
+  const all = DB.profiles(); all[u.email] = p; DB.saveProfiles(all);
+}
+function mySaved(){
+  const u = currentUser(); if(!u) return [];
+  return DB.saved()[u.email] || [];
+}
+function setMySaved(ids){
+  const u = currentUser(); if(!u) return;
+  const all = DB.saved(); all[u.email] = ids; DB.saveSaved(all);
+}
+function myApplications(){
+  const u = currentUser(); if(!u) return [];
+  return DB.applications().filter(a=>a.email===u.email);
+}
+function initials(a,b){ return ((a||' ')[0]+(b||' ')[0]).toUpperCase().replace(/\s/g,'·'); }
+function todayFR(){ return new Date().toLocaleDateString('fr-FR'); }
+
+/* ===================== CATALOGUE D'OFFRES (vraies entreprises, vrais liens) ===================== */
+const OFFERS = [
+  {id:1, title:"Alternant(e) Social Media Manager", company:"Dassault Systèmes", logo:"DS", sector:"Marketing & Communication", city:"Vélizy-Villacoublay", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:3, salary:1250, perks:"+ tickets resto + 50 % transport", match:96, src:"li", careerUrl:"https://www.3ds.com/careers/",
+   summary:"Gérez les réseaux sociaux France & Europe de la marque Brand Content de Dassault Systèmes.",
+   missions:["Création de contenu et community management","Reporting analytics (reach, engagement)","Coordination avec les équipes marketing","Veille tendances et benchmark concurrence"],
+   profile:["Bachelor/Licence communication ou marketing","Maîtrise des réseaux sociaux et de Canva","Bon rédactionnel, créativité","Anglais courant apprécié"]},
+  {id:2, title:"Alternant(e) Marketing & Acquisition", company:"Orange Business", logo:"OR", sector:"Marketing & Communication", city:"Issy-les-Moulineaux", region:"Île-de-France", contract:"Apprentissage", duration:24, start:"Oct. 2026", remote:"Hybride", level:4, salary:1100, perks:"+ intéressement + CE", match:91, src:"hw", careerUrl:"https://orange.jobs/site/fr-jeunes/index.htm",
+   summary:"Au sein de la Direction Marketing, pilotez les campagnes d'acquisition client B2B.",
+   missions:["Campagnes SEA et emailing","Création de landing pages","A/B testing et analyse de performance","Optimisation du tunnel de conversion"],
+   profile:["Master 1 marketing digital","Connaissance Google Ads / Analytics","Esprit analytique","Autonomie et rigueur"]},
+  {id:3, title:"Alternant(e) Brand Content & RSE", company:"Société Générale", logo:"SG", sector:"Marketing & Communication", city:"Paris", region:"Île-de-France", contract:"Professionnalisation", duration:12, start:"Sept. 2026", remote:"Présentiel", level:5, salary:980, perks:"+ prime vacances + 50 % Navigo", match:88, src:"wttj", careerUrl:"https://careers.societegenerale.com/",
+   summary:"Contribuez à la communication RSE et marque employeur du groupe.",
+   missions:["Rédaction de contenus RSE","Création visuelle","Coordination d'événements internes","Gestion des partenariats écoles"],
+   profile:["Master communication","Sensibilité RSE / développement durable","Maîtrise Adobe Suite","Excellent relationnel"]},
+  {id:4, title:"Alternant(e) Développeur Full-Stack", company:"Capgemini", logo:"CG", sector:"Informatique & Tech", city:"Toulouse", region:"Occitanie", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Hybride", level:5, salary:1300, perks:"+ mutuelle + RTT", match:84, src:"li", careerUrl:"https://www.capgemini.com/fr-fr/carrieres/offres-emploi/",
+   summary:"Rejoignez une équipe agile pour développer des applications web pour de grands comptes.",
+   missions:["Développement front (React) et back (Node/Java)","Participation aux cérémonies agiles","Tests unitaires et code review","Intégration continue (CI/CD)"],
+   profile:["Master informatique ou école d'ingénieur","JavaScript, React, Node ou Java","Notions de Git et méthodes agiles","Curiosité technique"]},
+  {id:5, title:"Alternant(e) Data Analyst", company:"BNP Paribas", logo:"BNP", sector:"Finance & Banque", city:"Paris", region:"Île-de-France", contract:"Apprentissage", duration:24, start:"Oct. 2026", remote:"Hybride", level:5, salary:1400, perks:"+ 13e mois + tickets resto", match:82, src:"in", careerUrl:"https://group.bnpparibas/en/careers/all-job-offers/apprenticeship",
+   summary:"Analysez les données métier pour aider la prise de décision des équipes risque.",
+   missions:["Extraction et nettoyage de données (SQL)","Dashboards Power BI / Tableau","Modélisation statistique","Restitution aux équipes métier"],
+   profile:["Master statistiques / data science","SQL, Python, Power BI","Rigueur analytique","Anglais professionnel"]},
+  {id:6, title:"Alternant(e) Chargé(e) de recrutement", company:"Decathlon", logo:"DK", sector:"RH & Management", city:"Lille", region:"Hauts-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Présentiel", level:3, salary:1000, perks:"+ réduction magasin + intéressement", match:90, boosted:true, src:"hw", careerUrl:"https://joinus.decathlon.fr/",
+   summary:"Participez au recrutement des équipes magasin et au développement de la marque employeur.",
+   missions:["Sourcing et présélection de candidats","Conduite d'entretiens","Organisation de job datings","Animation des réseaux sociaux RH"],
+   profile:["Licence/Bachelor RH","Aisance relationnelle","Passion pour le sport appréciée","Dynamisme et organisation"]},
+  {id:7, title:"Alternant(e) Contrôle de gestion", company:"SNCF", logo:"SN", sector:"Finance & Banque", city:"Lyon", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Hybride", level:5, salary:1150, perks:"+ avantages SNCF + mutuelle", match:79, src:"wttj", careerUrl:"https://www.emploi.sncf.com/nos-offres/",
+   summary:"Appuyez les équipes finance dans le pilotage budgétaire d'une grande région.",
+   missions:["Élaboration des budgets et reportings","Analyse des écarts","Construction d'indicateurs de performance","Automatisation de tableaux Excel"],
+   profile:["Master contrôle de gestion / finance","Excel avancé (TCD, macros)","Rigueur et esprit de synthèse","Capacité d'analyse"]},
+  {id:8, title:"Alternant(e) Chef de projet e-commerce", company:"L'Oréal", logo:"LO", sector:"Commerce & Vente", city:"Clichy", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:4, salary:1200, perks:"+ produits offerts + CE", match:93, boosted:true, src:"li", careerUrl:"https://careers.loreal.com/fr_FR/jobs/SearchJobs/Alternance",
+   summary:"Pilotez les opérations e-commerce d'une marque de beauté iconique.",
+   missions:["Gestion du catalogue produit en ligne","Animation commerciale du site","Suivi des ventes et du trafic","Coordination logistique et CRM"],
+   profile:["Master commerce / marketing","Appétence digital et e-commerce","Maîtrise d'Excel","Esprit entrepreneurial"]},
+  {id:9, title:"Alternant(e) Ingénieur Cybersécurité", company:"Thales", logo:"TH", sector:"Informatique & Tech", city:"Gennevilliers", region:"Île-de-France", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:5, salary:1350, perks:"+ prime + restaurant d'entreprise", match:80, src:"in", careerUrl:"https://www.thalesgroup.com/fr/carrieres",
+   summary:"Participez à la sécurisation des systèmes critiques de défense et d'aéronautique.",
+   missions:["Tests d'intrusion et audits","Analyse de vulnérabilités","Mise en place de solutions de sécurité","Veille sur les menaces"],
+   profile:["École d'ingénieur ou Master cybersécurité","Réseaux, Linux, scripting","Habilitable Défense","Anglais technique"]},
+  {id:10, title:"Alternant(e) Supply Chain", company:"Danone", logo:"DN", sector:"Logistique", city:"Paris", region:"Île-de-France", contract:"Professionnalisation", duration:12, start:"Oct. 2026", remote:"Hybride", level:4, salary:1080, perks:"+ produits + mutuelle", match:77, src:"hw", careerUrl:"https://careers.danone.com/",
+   summary:"Optimisez les flux logistiques sur une gamme de produits grande consommation.",
+   missions:["Suivi des stocks et approvisionnements","Analyse de la performance logistique","Coordination avec les fournisseurs","Projets d'amélioration continue"],
+   profile:["Master supply chain / logistique","Excel et ERP (SAP apprécié)","Esprit d'analyse","Sens de l'organisation"]},
+  {id:11, title:"Alternant(e) Commercial(e) B2B", company:"Schneider Electric", logo:"SE", sector:"Commerce & Vente", city:"Grenoble", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Hybride", level:3, salary:1150, perks:"+ variable + véhicule", match:85, src:"wttj", careerUrl:"https://www.se.com/fr/fr/about-us/careers/",
+   summary:"Développez un portefeuille de clients professionnels dans l'énergie.",
+   missions:["Prospection et développement commercial","Rendez-vous clients","Élaboration de devis","Suivi de la relation client"],
+   profile:["Bachelor commerce / vente","Aisance relationnelle et négociation","Permis B","Goût du challenge"]},
+  {id:12, title:"Alternant(e) Chargé(e) de communication", company:"AXA France", logo:"AX", sector:"Marketing & Communication", city:"Nanterre", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:4, salary:1120, perks:"+ tickets resto + télétravail", match:89, src:"in", careerUrl:"https://www.axa.fr/recrutement.html",
+   summary:"Accompagnez la communication interne et externe d'un leader de l'assurance.",
+   missions:["Rédaction de supports de communication","Animation de l'intranet","Organisation d'événements","Gestion des réseaux sociaux corporate"],
+   profile:["Master communication","Bon rédactionnel","Maîtrise des outils PAO","Créativité et autonomie"]},
+  {id:13, title:"Alternant(e) Ingénieur(e) Structures", company:"Airbus", logo:"AB", sector:"Ingénierie & Industrie", city:"Toulouse", region:"Occitanie", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:5, salary:1380, perks:"+ 13e mois + CSE", match:83, src:"li", careerUrl:"https://www.airbus.com/en/careers",
+   summary:"Participez au dimensionnement des structures d'avions commerciaux au sein du bureau d'études.",
+   missions:["Calculs de structures et simulations","Analyse des résultats d'essais","Rédaction de dossiers de justification"],
+   profile:["École d'ingénieur (méca/aéro)","Maîtrise de CATIA appréciée","Anglais technique courant"]},
+  {id:14, title:"Alternant(e) Génie Industriel", company:"Renault Group", logo:"RG", sector:"Ingénierie & Industrie", city:"Guyancourt", region:"Île-de-France", contract:"Apprentissage", duration:24, start:"Oct. 2026", remote:"Hybride", level:4, salary:1250, perks:"+ intéressement + RIE", match:78, src:"in", careerUrl:"https://www.renaultgroup.com/talents/",
+   summary:"Optimisez les process de production sur les lignes d'assemblage de véhicules électriques.",
+   missions:["Amélioration continue (lean)","Suivi des indicateurs de production","Déploiement de solutions d'automatisation"],
+   profile:["Master génie industriel","Connaissance lean manufacturing","Esprit terrain"]},
+  {id:15, title:"Alternant(e) Qualité Production", company:"Michelin", logo:"MI", sector:"Ingénierie & Industrie", city:"Clermont-Ferrand", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Présentiel", level:3, salary:1100, perks:"+ prime + mutuelle", match:81, src:"hw", careerUrl:"https://recrutement.michelin.fr/",
+   summary:"Garantissez la qualité des pneumatiques sur un site de production historique.",
+   missions:["Contrôles qualité et audits process","Analyse des non-conformités","Animation des routines qualité"],
+   profile:["BUT/Licence QLIO ou équivalent","Rigueur et méthode","Goût du travail en équipe"]},
+  {id:16, title:"Alternant(e) Ingénieur(e) d'Exploitation", company:"EDF", logo:"ED", sector:"Énergie & Environnement", city:"Lyon", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:5, salary:1400, perks:"+ 13e mois + aide logement", match:76, src:"li", careerUrl:"https://www.edf.fr/edf-recrute",
+   summary:"Appuyez les équipes d'exploitation d'un parc de production électrique.",
+   missions:["Suivi des performances des installations","Analyses de sûreté et de fiabilité","Participation aux projets de maintenance"],
+   profile:["École d'ingénieur énergie","Rigueur et sens des responsabilités","Aptitude au travail en équipe"]},
+  {id:17, title:"Chargé(e) de Projets Énergies Renouvelables", company:"Engie", logo:"EN", sector:"Énergie & Environnement", city:"Montpellier", region:"Occitanie", contract:"Professionnalisation", duration:12, start:"Oct. 2026", remote:"Hybride", level:4, salary:1180, perks:"+ tickets resto + télétravail", match:84, src:"wttj", careerUrl:"https://jobs.engie.com/",
+   summary:"Contribuez au développement de projets solaires et éoliens dans le sud de la France.",
+   missions:["Études de faisabilité","Suivi administratif des permis","Relations avec les collectivités"],
+   profile:["Master énergie/environnement","Connaissance du secteur EnR","Autonomie et relationnel"]},
+  {id:18, title:"Alternant(e) HSE", company:"Veolia", logo:"VE", sector:"Énergie & Environnement", city:"Marseille", region:"Provence-Alpes-Côte d'Azur", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Présentiel", level:3, salary:1050, perks:"+ prime + 13e mois", match:80, src:"in", careerUrl:"https://www.veolia.com/fr",
+   summary:"Déployez la culture sécurité et environnement sur les sites de traitement des eaux.",
+   missions:["Évaluation des risques","Animation des causeries sécurité","Suivi des plans d'action HSE"],
+   profile:["Licence HSE/QSE","Bon relationnel terrain","Permis B apprécié"]},
+  {id:19, title:"Analyste Trading Junior", company:"TotalEnergies", logo:"TE", sector:"Finance & Banque", city:"Paris", region:"Île-de-France", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Hybride", level:5, salary:1500, perks:"+ prime + restaurant d'entreprise", match:75, src:"li", careerUrl:"https://jobs.totalenergies.com/",
+   summary:"Analysez les marchés de l'énergie au sein de la salle des marchés.",
+   missions:["Modélisation et analyse de données de marché","Reporting quotidien aux traders","Automatisation d'outils (Python/VBA)"],
+   profile:["Master finance de marché","Python et Excel avancé","Anglais courant indispensable"]},
+  {id:20, title:"Conseiller(ère) Clientèle en alternance", company:"Crédit Agricole", logo:"CA", sector:"Finance & Banque", city:"Bordeaux", region:"Nouvelle-Aquitaine", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:3, salary:1120, perks:"+ 13e mois + tickets resto", match:88, src:"hw", careerUrl:"https://groupecreditagricole.jobs/",
+   summary:"Accompagnez les clients particuliers d'une agence dans leurs projets bancaires.",
+   missions:["Accueil et conseil client","Vente de produits bancaires","Gestion d'un portefeuille junior"],
+   profile:["BTS Banque ou Licence pro","Sens commercial","Excellente présentation"]},
+  {id:21, title:"Auditeur(trice) Financier(ère) Junior", company:"KPMG", logo:"KP", sector:"Audit & Conseil", city:"Paris", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:5, salary:1450, perks:"+ prime + tickets resto", match:82, src:"li", careerUrl:"https://www.kpmgrecrute.fr/",
+   summary:"Intégrez les équipes d'audit de grands comptes dès la rentrée.",
+   missions:["Travaux d'audit légal","Revue des comptes et contrôles","Rédaction de synthèses"],
+   profile:["Master CCA/audit ou école de commerce","Rigueur analytique","Esprit d'équipe"]},
+  {id:22, title:"Consultant(e) Transformation Digitale", company:"Deloitte", logo:"DL", sector:"Audit & Conseil", city:"Lyon", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:24, start:"Oct. 2026", remote:"Hybride", level:5, salary:1420, perks:"+ prime + mutuelle", match:79, src:"wttj", careerUrl:"https://www.deloitterecrute.fr/",
+   summary:"Accompagnez des clients grands comptes dans leurs projets de transformation.",
+   missions:["Cadrage des besoins métier","Ateliers de co-construction","Production de livrables de conseil"],
+   profile:["École de commerce ou d'ingénieur","Excellente communication","Curiosité digitale"]},
+  {id:23, title:"Alternant(e) Comptabilité & Fiscalité", company:"PwC", logo:"PW", sector:"Audit & Conseil", city:"Paris", region:"Île-de-France", contract:"Professionnalisation", duration:12, start:"Sept. 2026", remote:"Hybride", level:4, salary:1300, perks:"+ tickets resto + CE", match:77, src:"in", careerUrl:"https://carrieres.pwc.fr/",
+   summary:"Appuyez les équipes fiscales dans l'accompagnement de PME et ETI.",
+   missions:["Préparation des déclarations fiscales","Recherches documentaires","Participation aux missions de conseil"],
+   profile:["Master fiscalité/CCA","Rigueur rédactionnelle","Bon niveau d'anglais"]},
+  {id:24, title:"Alternant(e) Customer Success", company:"Doctolib", logo:"DO", sector:"Informatique & Tech", city:"Nantes", region:"Pays de la Loire", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:3, salary:1150, perks:"+ tickets resto + BSPCE virtuels", match:92, src:"wttj", careerUrl:"https://careers.doctolib.fr/",
+   summary:"Accompagnez les praticiens dans la prise en main de la plateforme santé n°1 en France.",
+   missions:["Onboarding des nouveaux clients","Support et formation des utilisateurs","Remontée des besoins produit"],
+   profile:["Bachelor/Licence","Empathie et pédagogie","Intérêt pour la e-santé"]},
+  {id:25, title:"Alternant(e) Affaires Réglementaires", company:"Sanofi", logo:"SA", sector:"Santé & Pharma", city:"Lyon", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:5, salary:1350, perks:"+ prime + restaurant d'entreprise", match:74, src:"li", careerUrl:"https://www.sanofi.com/fr/carrieres",
+   summary:"Contribuez aux dossiers d'enregistrement de médicaments en Europe.",
+   missions:["Préparation des dossiers réglementaires","Veille réglementaire EMA/ANSM","Coordination avec les équipes qualité"],
+   profile:["Master pharma/réglementaire","Rigueur documentaire","Anglais professionnel"]},
+  {id:26, title:"Technicien(ne) Datacenter en alternance", company:"OVHcloud", logo:"OV", sector:"Informatique & Tech", city:"Roubaix", region:"Hauts-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Présentiel", level:2, salary:1050, perks:"+ mutuelle + intéressement", match:86, src:"hw", careerUrl:"https://careers.ovhcloud.com/",
+   summary:"Assurez le maintien en conditions opérationnelles des serveurs du leader européen du cloud.",
+   missions:["Installation et câblage des serveurs","Diagnostic et remplacement de composants","Suivi des interventions dans les outils internes"],
+   profile:["BTS SIO/électrotechnique","Goût du hardware","Réactivité et rigueur"]},
+  {id:27, title:"Assistant(e) Marketing Jeux Vidéo", company:"Ubisoft", logo:"UB", sector:"Marketing & Communication", city:"Montreuil", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Oct. 2026", remote:"Hybride", level:4, salary:1200, perks:"+ jeux offerts + CE", match:90, src:"wttj", careerUrl:"https://www.ubisoft.com/fr-fr/company/careers",
+   summary:"Participez aux campagnes de lancement de franchises mondiales de jeux vidéo.",
+   missions:["Coordination des assets marketing","Animation des communautés de joueurs","Analyse des performances des campagnes"],
+   profile:["Master marketing","Passion jeux vidéo","Anglais courant"]},
+  {id:28, title:"Développeur(se) Java en alternance", company:"Sopra Steria", logo:"SO", sector:"Informatique & Tech", city:"Rennes", region:"Bretagne", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Hybride", level:4, salary:1280, perks:"+ tickets resto + RTT", match:85, src:"li", careerUrl:"https://www.soprasteria.com/fr/carrieres",
+   summary:"Développez des applications critiques pour les services publics et la défense.",
+   missions:["Développement Java/Spring","Tests automatisés","Participation aux sprints agiles"],
+   profile:["Master info ou école d'ingénieur","Java, SQL, Git","Esprit d'équipe"]},
+  {id:29, title:"Alternant(e) Méthodes & Industrialisation", company:"Safran", logo:"SF", sector:"Ingénierie & Industrie", city:"Bordeaux", region:"Nouvelle-Aquitaine", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:4, salary:1320, perks:"+ 13e mois + CSE", match:78, src:"in", careerUrl:"https://www.safran-group.com/fr/emploi-carriere",
+   summary:"Industrialisez les pièces de moteurs d'avions de nouvelle génération.",
+   missions:["Définition des gammes de fabrication","Optimisation des postes de travail","Support aux équipes de production"],
+   profile:["École d'ingénieur méca","Connaissance CAO","Curiosité industrielle"]},
+  {id:30, title:"Chef(fe) de Projet Innovation Junior", company:"Saint-Gobain", logo:"SG", sector:"Ingénierie & Industrie", city:"Paris", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:5, salary:1280, perks:"+ prime + télétravail", match:76, src:"hw", careerUrl:"https://joinus.saint-gobain.com/",
+   summary:"Pilotez des projets d'innovation matériaux pour la construction durable.",
+   missions:["Veille technologique","Coordination de prototypes","Études de marché innovation"],
+   profile:["École d'ingénieur ou master innovation","Gestion de projet","Anglais courant"]},
+  {id:31, title:"Conducteur(trice) de Travaux en alternance", company:"VINCI Construction", logo:"VC", sector:"BTP & Immobilier", city:"Nantes", region:"Pays de la Loire", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:3, salary:1250, perks:"+ panier + véhicule", match:83, src:"in", careerUrl:"https://jobs.vinci.com/",
+   summary:"Encadrez des chantiers de bâtiment aux côtés d'un conducteur de travaux confirmé.",
+   missions:["Préparation et suivi de chantier","Gestion des sous-traitants","Suivi budgétaire et planning"],
+   profile:["BUT GC ou école d'ingénieur BTP","Leadership terrain","Permis B"]},
+  {id:32, title:"Assistant(e) Revenue Management", company:"Accor", logo:"AC", sector:"Hôtellerie & Tourisme", city:"Issy-les-Moulineaux", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:4, salary:1150, perks:"+ nuits offertes + tickets resto", match:81, src:"wttj", careerUrl:"https://careers.accor.com/",
+   summary:"Optimisez les prix et le remplissage d'un portefeuille d'hôtels européens.",
+   missions:["Analyse des performances de vente","Recommandations tarifaires","Veille concurrentielle"],
+   profile:["Master revenue/hospitality","Excel avancé","Anglais courant"]},
+  {id:33, title:"Alternant(e) Expérience Client", company:"Air France", logo:"AF", sector:"Hôtellerie & Tourisme", city:"Roissy-CDG", region:"Île-de-France", contract:"Professionnalisation", duration:12, start:"Oct. 2026", remote:"Présentiel", level:3, salary:1100, perks:"+ billets à tarif réduit", match:87, src:"hw", careerUrl:"https://recrutement.airfrance.com/",
+   summary:"Améliorez les parcours passagers au sein du hub de Paris-Charles de Gaulle.",
+   missions:["Analyse des irritants clients","Projets d'amélioration des parcours","Coordination avec les équipes escale"],
+   profile:["Licence/Bachelor tourisme ou QSE","Sens du service","Anglais courant"]},
+  {id:34, title:"Manager d'Équipe Logistique en alternance", company:"La Poste", logo:"LP", sector:"Logistique", city:"Strasbourg", region:"Grand Est", contract:"Professionnalisation", duration:24, start:"Sept. 2026", remote:"Présentiel", level:3, salary:1170, perks:"+ 13e mois + mutuelle", match:80, src:"in", careerUrl:"https://www.laposterecrute.fr/",
+   summary:"Encadrez une équipe de tri et de distribution sur une plateforme industrielle.",
+   missions:["Animation d'une équipe d'opérateurs","Pilotage des flux quotidiens","Démarche d'amélioration continue"],
+   profile:["Licence management/logistique","Leadership naturel","Disponibilité horaires décalés"]},
+  {id:35, title:"Conseiller(ère) de Vente en alternance", company:"Leroy Merlin", logo:"LM", sector:"Commerce & Vente", city:"Toulouse", region:"Occitanie", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Présentiel", level:2, salary:980, perks:"+ intéressement + prime", match:89, src:"hw", careerUrl:"https://recrute.leroymerlin.fr/",
+   summary:"Conseillez les clients d'un rayon habitat et participez à la vie du magasin.",
+   missions:["Conseil et vente client","Mise en rayon et merchandising","Gestion des stocks du rayon"],
+   profile:["BTS MCO/NDRC","Sens du contact","Goût du bricolage apprécié"]},
+  {id:36, title:"Alternant(e) Manager de Rayon", company:"Auchan", logo:"AU", sector:"Commerce & Vente", city:"Lille", region:"Hauts-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Présentiel", level:2, salary:1000, perks:"+ prime + réduction magasin", match:85, src:"in", careerUrl:"https://recrutement.auchan.fr/",
+   summary:"Apprenez le métier de manager de rayon dans un hypermarché du groupe.",
+   missions:["Gestion d'un rayon (commandes, stocks)","Animation commerciale","Management d'une petite équipe"],
+   profile:["BTS MCO ou Bachelor commerce","Dynamisme","Sens des responsabilités"]},
+  {id:37, title:"Category Manager Junior", company:"Fnac Darty", logo:"FD", sector:"Commerce & Vente", city:"Ivry-sur-Seine", region:"Île-de-France", contract:"Apprentissage", duration:24, start:"Oct. 2026", remote:"Hybride", level:4, salary:1230, perks:"+ réductions + tickets resto", match:79, src:"wttj", careerUrl:"https://www.fnacdarty.com/nous-rejoindre/",
+   summary:"Pilotez une catégorie produits tech sur les canaux web et magasins.",
+   missions:["Analyse des ventes et du marché","Négociation avec les fournisseurs","Plan d'animation commerciale"],
+   profile:["Master achats/commerce","Esprit analytique","Appétence produits tech"]},
+  {id:38, title:"Alternant(e) Juriste d'Affaires", company:"EY", logo:"EY", sector:"Juridique & Administration", city:"Paris", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:5, salary:1400, perks:"+ prime + tickets resto", match:75, src:"li", careerUrl:"https://www.ey.com/fr_fr/careers",
+   summary:"Accompagnez les équipes droit des sociétés dans des opérations de M&A.",
+   missions:["Recherches juridiques","Rédaction d'actes et de notes","Suivi des formalités"],
+   profile:["Master 2 droit des affaires","Rigueur rédactionnelle","Anglais juridique"]},
+  {id:39, title:"Supply Chain Planner en alternance", company:"Alstom", logo:"AL", sector:"Logistique", city:"Valenciennes", region:"Hauts-de-France", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:4, salary:1260, perks:"+ 13e mois + CSE", match:77, src:"in", careerUrl:"https://www.alstom.com/careers",
+   summary:"Planifiez les approvisionnements pour la production de trains régionaux.",
+   missions:["Planification des besoins matière","Coordination fournisseurs","Gestion des aléas logistiques"],
+   profile:["Master supply chain","ERP (SAP) apprécié","Anglais professionnel"]},
+  {id:40, title:"Technicien(ne) Réseaux Fibre en alternance", company:"Orange", logo:"OR", sector:"Informatique & Tech", city:"Rennes", region:"Bretagne", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Présentiel", level:2, salary:1020, perks:"+ intéressement + CE", match:84, src:"hw", careerUrl:"https://orange.jobs/",
+   summary:"Déployez et maintenez le réseau fibre optique sur la métropole rennaise.",
+   missions:["Raccordements clients","Diagnostic des incidents réseau","Mise à jour des référentiels techniques"],
+   profile:["BTS SN/réseaux","Permis B","Goût du terrain"]},
+  {id:41, title:"Alternant(e) Marketing Digital", company:"Carrefour", logo:"CF", sector:"Marketing & Communication", city:"Massy", region:"Île-de-France", contract:"Apprentissage", duration:12, start:"Sept. 2026", remote:"Hybride", level:3, salary:1050, perks:"+ tickets resto + réductions", match:91, boosted:true, src:"hw", careerUrl:"https://recrute.carrefour.fr/",
+   summary:"Animez les campagnes digitales d'une des plus grandes enseignes françaises.",
+   missions:["Campagnes emailing et social media","Création de contenus e-commerce","Suivi des KPI digitaux"],
+   profile:["Bachelor/Licence marketing digital","Canva, Meta Ads","Créativité et rigueur"]},
+  {id:42, title:"Alternant(e) Data Analyst Retail", company:"Decathlon", logo:"DK", sector:"Informatique & Tech", city:"Lyon", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Hybride", level:4, salary:1220, perks:"+ réduction magasin + prime", match:88, src:"wttj", careerUrl:"https://joinus.decathlon.fr/",
+   summary:"Analysez les données de vente omnicanales pour guider les décisions des magasins.",
+   missions:["Dashboards Power BI","Analyses ad hoc pour le réseau","Industrialisation des reportings"],
+   profile:["Master data/statistiques","SQL et Power BI","Sens du commerce"]},
+  {id:43, title:"Software Engineer Apprentice", company:"Amadeus", logo:"AM", sector:"Informatique & Tech", city:"Nice", region:"Provence-Alpes-Côte d'Azur", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Hybride", level:5, salary:1400, perks:"+ prime + restaurant d'entreprise", match:82, src:"li", careerUrl:"https://amadeus.com/en/careers",
+   summary:"Développez les systèmes qui font voler l'industrie mondiale du voyage.",
+   missions:["Développement C++/Java sur des systèmes critiques","Tests et intégration continue","Collaboration avec des équipes internationales"],
+   profile:["École d'ingénieur informatique","C++, Java ou Python","Anglais courant (équipes internationales)"]},
+  {id:44, title:"Alternant(e) Microélectronique", company:"STMicroelectronics", logo:"ST", sector:"Ingénierie & Industrie", city:"Grenoble", region:"Auvergne-Rhône-Alpes", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:4, salary:1300, perks:"+ 13e mois + CSE", match:78, src:"in", careerUrl:"https://www.st.com",
+   summary:"Participez à la conception de puces électroniques de nouvelle génération.",
+   missions:["Caractérisation de composants","Analyse des rendements","Support aux équipes de conception"],
+   profile:["Master électronique/physique","Curiosité scientifique","Anglais technique"]},
+  {id:45, title:"Alternant(e) Transport Maritime", company:"CMA CGM", logo:"CC", sector:"Logistique", city:"Marseille", region:"Provence-Alpes-Côte d'Azur", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:4, salary:1280, perks:"+ 13e mois + RIE", match:81, src:"li", careerUrl:"https://www.cmacgm-group.com/en/careers",
+   summary:"Coordonnez les opérations d'un des leaders mondiaux du transport maritime.",
+   missions:["Suivi des escales et des conteneurs","Relation avec les agences portuaires","Optimisation des coûts de transport"],
+   profile:["Master transport/logistique","Anglais courant","Réactivité"]},
+  {id:46, title:"Responsable de Secteur en alternance", company:"Lidl France", logo:"LI", sector:"Commerce & Vente", city:"Strasbourg", region:"Grand Est", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:3, salary:1350, perks:"+ 13e mois + voiture de service", match:83, src:"in", careerUrl:"https://emplois.lidl.fr/",
+   summary:"Formez-vous au management de plusieurs supermarchés dès votre alternance.",
+   missions:["Pilotage des indicateurs de plusieurs magasins","Accompagnement des équipes","Garantie des standards de l'enseigne"],
+   profile:["Bachelor/Master commerce","Leadership affirmé","Permis B obligatoire"]},
+  {id:47, title:"Consultant(e) Data Junior", company:"Capgemini", logo:"CG", sector:"Informatique & Tech", city:"Montpellier", region:"Occitanie", contract:"Apprentissage", duration:12, start:"Oct. 2026", remote:"Hybride", level:4, salary:1240, perks:"+ tickets resto + RTT", match:86, src:"wttj", careerUrl:"https://www.capgemini.com/fr-fr/carrieres/offres-emploi/",
+   summary:"Aidez les clients du sud de la France à valoriser leurs données.",
+   missions:["Préparation et fiabilisation des données","Dashboards et datavisualisation","Ateliers avec les métiers"],
+   profile:["Master data/BI","SQL, Power BI ou Tableau","Aisance orale"]},
+  {id:48, title:"Alternant(e) Systèmes Embarqués", company:"Thales", logo:"TH", sector:"Ingénierie & Industrie", city:"Mérignac", region:"Nouvelle-Aquitaine", contract:"Apprentissage", duration:24, start:"Sept. 2026", remote:"Présentiel", level:5, salary:1360, perks:"+ prime + restaurant d'entreprise", match:80, src:"li", careerUrl:"https://www.thalesgroup.com/fr/carrieres",
+   summary:"Développez les logiciels embarqués des systèmes avioniques de demain.",
+   missions:["Développement C/C++ embarqué","Tests unitaires et d'intégration","Documentation technique"],
+   profile:["École d'ingénieur (embarqué)","C/C++, RTOS","Habilitable Défense"]},
+];
+function allOffers(){ return OFFERS.concat(DB.customOffers()); }
+function findOffer(id){ return allOffers().find(o=>o.id===id); }
+
+const SOURCE_META = {
+  hw:{name:"HelloWork", cls:"src-hw", url:(q,c)=>`https://www.hellowork.com/fr-fr/emploi/recherche.html?k=${encodeURIComponent(q)}&l=${encodeURIComponent(c)}`},
+  li:{name:"LinkedIn", cls:"src-li", url:(q,c)=>`https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(q)}&location=${encodeURIComponent(c)}`},
+  in:{name:"Indeed", cls:"src-in", url:(q,c)=>`https://fr.indeed.com/jobs?q=${encodeURIComponent(q)}&l=${encodeURIComponent(c)}`},
+  wttj:{name:"Welcome to the Jungle", cls:"src-wttj", url:(q,c)=>`https://www.welcometothejungle.com/fr/jobs?query=${encodeURIComponent(q)}&aroundQuery=${encodeURIComponent(c)}`},
+};
+const LEVELS = {2:"BAC+2",3:"BAC+3",4:"BAC+4",5:"BAC+5"};
+const remoteEmoji = {"Télétravail":"🏠","Hybride":"🔄","Présentiel":"🏢"};
+
+/* Logos officiels : favicon du domaine de l'entreprise, repli sur les initiales si indisponible */
+const DOMAINS = {
+  "Dassault Systèmes":"3ds.com","Orange Business":"orange.com","Société Générale":"societegenerale.com",
+  "Capgemini":"capgemini.com","BNP Paribas":"bnpparibas.com","Decathlon":"decathlon.fr","SNCF":"sncf.com",
+  "L'Oréal":"loreal.com","Thales":"thalesgroup.com","Danone":"danone.com","Schneider Electric":"se.com",
+  "AXA France":"axa.fr","Airbus":"airbus.com","Renault Group":"renaultgroup.com","Michelin":"michelin.fr",
+  "EDF":"edf.fr","Engie":"engie.com","Veolia":"veolia.com","TotalEnergies":"totalenergies.com",
+  "Crédit Agricole":"credit-agricole.fr","KPMG":"kpmg.fr","Deloitte":"deloitte.com","PwC":"pwc.fr",
+  "Doctolib":"doctolib.fr","Sanofi":"sanofi.com","OVHcloud":"ovhcloud.com","Ubisoft":"ubisoft.com",
+  "Sopra Steria":"soprasteria.com","Safran":"safran-group.com","Saint-Gobain":"saint-gobain.com",
+  "VINCI Construction":"vinci.com","Accor":"accor.com","Air France":"airfrance.fr","La Poste":"laposte.fr",
+  "Leroy Merlin":"leroymerlin.fr","Auchan":"auchan.fr","Fnac Darty":"fnacdarty.com","EY":"ey.com",
+  "Alstom":"alstom.com","Orange":"orange.com","Carrefour":"carrefour.com","Amadeus":"amadeus.com",
+  "STMicroelectronics":"st.com","CMA CGM":"cmacgm-group.com","Lidl France":"lidl.fr"
+};
+function logoHTML(o, css){
+  let d = DOMAINS[o.company];
+  if(!d && o.careerUrl){ try{ d = new URL(o.careerUrl).hostname.replace(/^www\./,''); }catch(e){} }
+  const st = css ? ` style="${css}"` : '';
+  if(!d) return `<div class="clogo"${st}>${o.logo}</div>`;
+  const fail = "this.style.display='none';this.nextElementSibling.style.display='inline';";
+  const tryAlt = "if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt='';}else{"+fail+"}";
+  return `<div class="clogo clogo-img"${st}><img src="https://www.google.com/s2/favicons?domain=${d}&sz=128" alt="Logo ${o.company}" loading="lazy" data-alt="https://icons.duckduckgo.com/ip3/${d}.ico" onload="if(this.naturalWidth<32){${tryAlt}}" onerror="${tryAlt}"><span style="display:none">${o.logo}</span></div>`;
+}
+
+/* ===================== NAVIGATION ===================== */
+function go(page, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const nav = document.querySelector('.nav-links a[data-nav="'+page+'"]');
+  if(nav) nav.classList.add('active');
+  document.querySelectorAll('.sidebar').forEach(s=>s.classList.remove('open'));
+  document.getElementById('scrim').classList.remove('open');
+  if(page==='student') renderStudent();
+  if(page==='recruiter') renderRecruiter();
+  if(page==='school') renderSchool();
+  if(page==='fiche') prefillFiche();
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function navEl(page){ return document.querySelector('.nav-links a[data-nav="'+page+'"]'); }
+function toggleSidebar(){
+  const onPage = document.querySelector('.page.active').id.replace('page-','');
+  const sb = document.getElementById('sb-'+onPage);
+  if(sb){ sb.classList.toggle('open'); document.getElementById('scrim').classList.toggle('open'); }
+}
+function quickSearch(term){
+  document.getElementById('sKeyword').value = term;
+  renderOffers();
+}
+function openPricing(){
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-head"><h3>Tarifs — simples et honnêtes</h3><button class="modal-x" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="detail-row"><span class="k">🎓 Étudiants</span><span><b>Gratuit</b> — profil, CV, candidatures illimitées</span></div>
+      <div class="detail-row"><span class="k">🏢 Recruteurs</span><span><b>0 € d'abonnement</b> — publication illimitée et gratuite</span></div>
+      <div class="detail-row"><span class="k">🚀 Boost (option)</span><span><b>19 € / offre / 30 jours</b> — en tête des résultats, paiement unique</span></div>
+      <div class="detail-row"><span class="k">🏫 Écoles / CFA</span><span><b>Gratuit</b> — suivi des étudiants, validation des fiches</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:14px">Pas d'abonnement mensuel, pas de budget au clic : vous ne payez que si vous décidez de booster une offre en tête de liste.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" style="flex:1;justify-content:center" onclick="openAuth('signup','recruteur')">Compte recruteur</button>
+      <button class="btn btn-primary" style="flex:1;justify-content:center" onclick="openAuth('signup','etudiant')">Compte étudiant</button>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+}
+
+/* ===================== NAV AUTH (connexion / profil) ===================== */
+function updateNav(){
+  const u = currentUser();
+  const el = document.getElementById('navAuth');
+  if(!u){
+    el.innerHTML = `<button class="btn btn-ghost" onclick="openAuth('login')">Connexion</button>
+      <button class="btn btn-primary" onclick="openAuth('signup')">Inscription gratuite</button>`;
+  } else {
+    const name = u.role==='etudiant' ? u.prenom : (u.orgName||u.prenom);
+    const ini = u.role==='etudiant' ? initials(u.prenom,u.nom) : initials(name,name.split(' ')[1]||name[1]||'');
+    const home = u.role==='etudiant'?'student':u.role==='recruteur'?'recruiter':'school';
+    el.innerHTML = `<span class="user-chip" onclick="go('${home}',navEl('${home}'))"><span class="avatar">${ini}</span>${name}</span>
+      <button class="btn btn-ghost btn-sm" onclick="logout()" title="Déconnexion">Déconnexion</button>`;
+  }
+  refreshStats();
+}
+function logout(){
+  DB.setSession(null);
+  updateNav(); renderOffers(); renderStudent(); renderRecruiter(); renderSchool();
+  go('search', navEl('search'));
+  toast('👋','Vous êtes déconnecté(e). À bientôt !');
+}
+function refreshStats(){
+  const accts = Object.values(DB.accounts());
+  document.getElementById('statOffers').textContent = allOffers().length;
+  document.getElementById('statCompanies').textContent = new Set(allOffers().map(o=>o.company)).size + accts.filter(a=>a.role==='recruteur').length;
+  document.getElementById('statStudents').textContent = accts.filter(a=>a.role==='etudiant').length;
+}
+
+/* ===================== AUTH ===================== */
+function openAuth(mode, presetRole){
+  const isSignup = mode==='signup';
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-head"><h3>${isSignup?'Créer un compte gratuit':'Connexion'}</h3><button class="modal-x" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      ${isSignup?`
+      <div class="form-row full"><div><label class="flabel">Je suis *</label>
+        <select class="finput" id="authRole" onchange="authRoleFields()">
+          <option value="etudiant" ${presetRole==='etudiant'?'selected':''}>🎓 Étudiant(e) — je cherche une alternance</option>
+          <option value="recruteur" ${presetRole==='recruteur'?'selected':''}>🏢 Recruteur — je publie des offres</option>
+          <option value="ecole" ${presetRole==='ecole'?'selected':''}>🏫 École / CFA — je suis mes étudiants</option>
+        </select></div></div>
+      <div id="authFields"></div>`:''}
+      <div class="form-row full"><div><label class="flabel">Email *</label><input class="finput" type="email" id="authEmail" placeholder="vous@email.fr"></div></div>
+      <div class="form-row full"><div><label class="flabel">Mot de passe *</label><input class="finput" type="password" id="authPass" placeholder="••••••••"></div></div>
+      <button class="btn btn-primary btn-block" onclick="${isSignup?'doSignup()':'doLogin()'}">${isSignup?'Créer mon compte':'Se connecter'}</button>
+      <div style="text-align:center;font-size:13px;color:var(--muted);margin-top:14px">${isSignup?'Déjà inscrit ?':'Pas encore de compte ?'} <a style="color:var(--indigo-d);font-weight:600;cursor:pointer" onclick="openAuth('${isSignup?'login':'signup'}')">${isSignup?'Se connecter':'Créer un compte'}</a></div>
+      <div class="privacy-note">🔒 Démo 100 % locale : votre compte, votre profil et votre CV restent dans <b>votre navigateur</b>. Rien n'est envoyé sur internet.</div>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+  if(isSignup) authRoleFields();
+}
+function authRoleFields(){
+  const role = document.getElementById('authRole').value;
+  let html='';
+  if(role==='etudiant'){
+    html = `<div class="form-row"><div><label class="flabel">Prénom *</label><input class="finput" id="authPrenom" placeholder="Votre prénom"></div><div><label class="flabel">Nom *</label><input class="finput" id="authNom" placeholder="Votre nom"></div></div>`;
+  } else if(role==='recruteur'){
+    html = `<div class="form-row full"><div><label class="flabel">Nom de l'entreprise *</label><input class="finput" id="authOrg" placeholder="Ex : Dupont SAS"></div></div>
+            <div class="form-row"><div><label class="flabel">Votre prénom *</label><input class="finput" id="authPrenom" placeholder="Prénom"></div><div><label class="flabel">Votre nom *</label><input class="finput" id="authNom" placeholder="Nom"></div></div>`;
+  } else {
+    html = `<div class="form-row full"><div><label class="flabel">Nom de l'établissement *</label><input class="finput" id="authOrg" placeholder="Ex : IUT de Lyon, CFA XYZ..."></div></div>
+            <div class="form-row"><div><label class="flabel">Votre prénom *</label><input class="finput" id="authPrenom" placeholder="Prénom"></div><div><label class="flabel">Votre nom *</label><input class="finput" id="authNom" placeholder="Nom"></div></div>`;
+  }
+  document.getElementById('authFields').innerHTML = html;
+}
+function doSignup(){
+  const role = document.getElementById('authRole').value;
+  const email = (document.getElementById('authEmail').value||'').trim().toLowerCase();
+  const pass = document.getElementById('authPass').value||'';
+  const prenom = (document.getElementById('authPrenom')?.value||'').trim();
+  const nom = (document.getElementById('authNom')?.value||'').trim();
+  const orgName = (document.getElementById('authOrg')?.value||'').trim();
+  if(!email.includes('@')){ toast('⚠️','Entrez un email valide'); return; }
+  if(pass.length<4){ toast('⚠️','Mot de passe : 4 caractères minimum'); return; }
+  if(!prenom||!nom){ toast('⚠️','Prénom et nom requis'); return; }
+  if(role!=='etudiant' && !orgName){ toast('⚠️', role==='recruteur'?"Nom de l'entreprise requis":"Nom de l'établissement requis"); return; }
+  const accounts = DB.accounts();
+  if(accounts[email]){ toast('⚠️','Un compte existe déjà avec cet email — connectez-vous'); return; }
+  accounts[email] = {role, email, pass, prenom, nom, orgName, createdAt: todayFR()};
+  DB.saveAccounts(accounts);
+  DB.setSession(email);
+  closeModal(); updateNav(); renderOffers();
+  if(role==='etudiant'){ go('student',navEl('student')); toast('🐸','Bienvenue '+prenom+' ! Complétez votre profil et ajoutez votre CV.'); openProfileEditor(); }
+  else if(role==='recruteur'){ go('recruiter',navEl('recruiter')); toast('🎉','Bienvenue ! Publiez votre première offre gratuitement.'); }
+  else { go('school',navEl('school')); toast('🎉','Bienvenue ! Votre espace école est prêt.'); }
+}
+function doLogin(){
+  const email = (document.getElementById('authEmail').value||'').trim().toLowerCase();
+  const pass = document.getElementById('authPass').value||'';
+  const a = DB.accounts()[email];
+  if(!a || a.pass!==pass){ toast('⚠️','Email ou mot de passe incorrect'); return; }
+  DB.setSession(email);
+  closeModal(); updateNav(); renderOffers();
+  const home = a.role==='etudiant'?'student':a.role==='recruteur'?'recruiter':'school';
+  go(home, navEl(home));
+  toast('👋','Bon retour, '+(a.prenom||a.orgName)+' !');
+}
+
+/* ===================== GATE (espace protégé) ===================== */
+function gateHTML(emoji, title, desc, role){
+  const u = currentUser();
+  if(u){
+    const roleLabel = {etudiant:'Étudiant',recruteur:'Recruteur',ecole:'École / CFA'}[u.role];
+    return `<div class="gate"><span class="em">${emoji}</span><h2>${title}</h2>
+      <p>Vous êtes connecté(e) avec un compte <b>${roleLabel}</b>. Cet espace est réservé aux comptes ${ {etudiant:'Étudiant',recruteur:'Recruteur',ecole:'École / CFA'}[role] }.</p>
+      <div class="btns"><button class="btn btn-outline" onclick="logout()">Changer de compte</button></div></div>`;
+  }
+  return `<div class="gate"><span class="em">${emoji}</span><h2>${title}</h2><p>${desc}</p>
+    <div class="btns">
+      <button class="btn btn-primary" onclick="openAuth('signup','${role}')">Créer un compte gratuit</button>
+      <button class="btn btn-outline" onclick="openAuth('login')">J'ai déjà un compte</button>
+    </div></div>`;
+}
+
+/* ===================== ESPACE ÉTUDIANT ===================== */
+function profileCompletion(p, u){
+  let pts = 0;
+  if(u&&u.prenom) pts+=10; if(u&&u.nom) pts+=10;
+  if(p.phone) pts+=10; if(p.ville) pts+=10;
+  if(p.ecole) pts+=10; if(p.formation) pts+=10; if(p.niveau) pts+=10;
+  if(p.about) pts+=10;
+  if((p.skills||[]).length>=3) pts+=10;
+  if(p.cv) pts+=10;
+  return pts;
+}
+function renderStudent(){
+  const root = document.getElementById('studentRoot');
+  const u = currentUser();
+  if(!u || u.role!=='etudiant'){
+    root.innerHTML = gateHTML('🎓','Espace étudiant',"Créez votre compte gratuit pour remplir votre profil, déposer votre CV et postuler en 1 clic.",'etudiant');
+    return;
+  }
+  const p = getProfile();
+  const pct = profileCompletion(p,u);
+  const apps = myApplications();
+  const saved = mySaved();
+  const reco = [...allOffers()].sort((a,b)=>(b.match||0)-(a.match||0)).slice(0,4);
+
+  const appsHTML = apps.length ? apps.slice().reverse().map(a=>{
+    const o = findOffer(a.offerId);
+    if(!o) return '';
+    return `<div class="row-item">${logoHTML(o)}<div class="row-main"><div class="row-title">${o.title}</div><div class="row-sub">${o.company} · ${o.city} · candidaté le ${a.date}</div></div><span class="badge b-blue">Envoyée</span></div>`;
+  }).join('') : `<div class="empty"><span class="em">📭</span><b>Aucune candidature pour le moment</b><br>Explorez les offres et postulez en 1 clic avec votre CV.</div>`;
+
+  const savedHTML = saved.length ? saved.map(id=>{
+    const o = findOffer(id); if(!o) return '';
+    return `<div class="row-item">${logoHTML(o)}<div class="row-main"><div class="row-title">${o.title}</div><div class="row-sub">${o.company} · ${o.city} · ${o.salary} €/mois</div></div><button class="btn btn-primary btn-sm" onclick="applyOffer(${o.id},this)">Postuler</button></div>`;
+  }).join('') : `<div class="empty"><span class="em">🤍</span><b>Aucune offre sauvegardée</b><br>Cliquez sur 🤍 sur une offre pour la retrouver ici.</div>`;
+
+  const cvHTML = p.cv
+    ? `<div class="cv-file"><span class="ic">📄</span><div style="flex:1;min-width:0"><div class="nm">${p.cv.name}</div><div class="meta">Ajouté le ${p.cv.date} · ${(p.cv.size/1024).toFixed(0)} Ko</div></div>
+       <a class="btn btn-ghost btn-sm" style="border:1px solid var(--line)" href="${p.cv.data}" download="${p.cv.name}">⬇️</a></div>`
+    : `<div class="cv-zone"><div style="font-size:28px;margin-bottom:6px">📎</div><div style="font-size:13px;color:var(--muted);margin-bottom:10px">Aucun CV — ajoutez-le pour postuler en 1 clic</div><button class="btn btn-primary btn-sm" onclick="openProfileEditor()">＋ Ajouter mon CV</button></div>`;
+
+  const skillsHTML = (p.skills&&p.skills.length) ? p.skills.map(s=>`<span class="chip">${s}</span>`).join('') : `<span style="font-size:13px;color:var(--muted)">Aucune compétence renseignée pour l'instant.</span>`;
+
+  root.innerHTML = `
+  <div class="app">
+    <aside class="sidebar" id="sb-student">
+      <div class="side-user"><div class="avatar">${initials(u.prenom,u.nom)}</div><div><div class="nm">${u.prenom} ${u.nom}</div><div class="rl">${p.formation||'Profil à compléter'}</div></div></div>
+      <div class="side-label">Navigation</div>
+      <div class="side-item active"><span class="em">📊</span> Tableau de bord</div>
+      <div class="side-item" onclick="go('search',navEl('search'))"><span class="em">🔍</span> Chercher des offres</div>
+      <div class="side-item" onclick="openProfileEditor()"><span class="em">👤</span> Mon profil & CV</div>
+      <div class="side-item" onclick="go('fiche',navEl('fiche'))"><span class="em">📄</span> Fiche de mission</div>
+      <div class="side-label">Compte</div>
+      <div class="side-item" onclick="logout()"><span class="em">🚪</span> Déconnexion</div>
+    </aside>
+    <div class="main">
+      <div class="main-head">
+        <div><h1>Bonjour ${u.prenom} 👋</h1><div class="sub">Votre espace candidat — ${todayFR()}</div></div>
+        <button class="btn btn-primary" onclick="go('search',navEl('search'))">🔍 Chercher des offres</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="n">${apps.length}</div><div class="l">Candidatures envoyées</div></div>
+        <div class="kpi"><div class="n">${saved.length}</div><div class="l">Offres sauvegardées</div></div>
+        <div class="kpi"><div class="n">${pct} %</div><div class="l">Profil complété</div></div>
+        <div class="kpi"><div class="n">${allOffers().length}</div><div class="l">Offres disponibles</div></div>
+      </div>
+      ${pct<100?`<div class="panel" style="border-color:#fecaca;background:var(--purple-bg)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+          <div><b style="font-size:15px">Complétez votre profil (${pct} %)</b><div style="font-size:13px;color:var(--muted);margin-top:2px">${!p.cv?'Il manque votre CV — indispensable pour postuler en 1 clic.':'Plus votre profil est complet, plus vos candidatures sont efficaces.'}</div></div>
+          <button class="btn btn-primary" onclick="openProfileEditor()">✏️ Compléter mon profil</button>
+        </div>
+        <div class="progress"><i style="width:${pct}%"></i></div>
+      </div>`:''}
+      <div class="grid-2 wide">
+        <div class="panel">
+          <div class="panel-head"><h3>Mes candidatures</h3><span class="link" onclick="go('search',navEl('search'))">＋ Postuler</span></div>
+          ${appsHTML}
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Mon profil</h3><span class="link" onclick="openProfileEditor()">✏️ Modifier</span></div>
+          <div style="display:flex;align-items:center;gap:13px;margin-bottom:14px">
+            <div class="avatar" style="width:54px;height:54px;font-size:18px">${initials(u.prenom,u.nom)}</div>
+            <div><div style="font-weight:800;font-size:16px">${u.prenom} ${u.nom}</div>
+            <div style="font-size:13px;color:var(--muted)">${p.formation||'Formation non renseignée'}</div>
+            <div style="font-size:13px;color:var(--indigo-d);font-weight:600">${p.ecole||'École non renseignée'}${p.ville?' · '+p.ville:''}</div></div>
+          </div>
+          <div style="margin-bottom:14px">${cvHTML}</div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:4px">Compétences</div>
+          <div class="chips">${skillsHTML}</div>
+        </div>
+      </div>
+      <div class="grid-2 wide">
+        <div class="panel">
+          <div class="panel-head"><h3>Offres recommandées</h3><span class="link" onclick="go('search',navEl('search'))">Voir tout</span></div>
+          ${reco.map(o=>`<div class="row-item">${logoHTML(o)}<div class="row-main"><div class="row-title">${o.title}</div><div class="row-sub">${o.company} · ${o.city} · ${o.salary} €/mois</div></div><div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">${o.match?`<span class="match">${o.match}%</span>`:''}<button class="btn btn-primary btn-sm" onclick="applyOffer(${o.id},this)">Postuler</button></div></div>`).join('')}
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Offres sauvegardées</h3></div>
+          ${savedHTML}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ===================== ÉDITEUR DE PROFIL + CV ===================== */
+let editorSkills = [];
+function openProfileEditor(){
+  const u = currentUser();
+  if(!u || u.role!=='etudiant'){ openAuth('signup','etudiant'); return; }
+  const p = getProfile();
+  editorSkills = (p.skills||[]).slice();
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-head"><h3>Mon profil & CV</h3><button class="modal-x" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row"><div><label class="flabel">Prénom</label><input class="finput" id="pePrenom" value="${u.prenom||''}"></div><div><label class="flabel">Nom</label><input class="finput" id="peNom" value="${u.nom||''}"></div></div>
+      <div class="form-row"><div><label class="flabel">Téléphone</label><input class="finput" id="pePhone" value="${p.phone||''}" placeholder="06 XX XX XX XX"></div><div><label class="flabel">Ville recherchée</label><input class="finput" id="peVille" value="${p.ville||''}" placeholder="Ex : Lyon"></div></div>
+      <div class="form-row"><div><label class="flabel">École / CFA</label><input class="finput" id="peEcole" value="${p.ecole||''}" placeholder="Ex : IUT de Lyon"></div><div><label class="flabel">Niveau préparé</label>
+        <select class="finput" id="peNiveau">
+          <option value="">— Choisir —</option>
+          ${['BAC+2','BAC+3','BAC+4','BAC+5'].map(n=>`<option ${p.niveau===n?'selected':''}>${n}</option>`).join('')}
+        </select></div></div>
+      <div class="form-row full"><div><label class="flabel">Formation préparée</label><input class="finput" id="peFormation" value="${p.formation||''}" placeholder="Ex : BTS Commerce, Bachelor Marketing..."></div></div>
+      <div class="form-row full"><div><label class="flabel">À propos de moi</label><textarea class="finput" id="peAbout" rows="3" placeholder="Présentez-vous en quelques lignes (motivation, objectifs...)">${p.about||''}</textarea></div></div>
+      <div class="form-row full"><div><label class="flabel">Compétences <span style="font-weight:400;color:var(--muted)">(Entrée pour ajouter)</span></label>
+        <input class="finput" id="peSkillInput" placeholder="Ex : Excel, SEO, Photoshop..." onkeydown="if(event.key==='Enter'){event.preventDefault();addSkill();}">
+        <div class="chips" id="peSkills"></div></div></div>
+      <div class="form-row full"><div><label class="flabel">Mon CV <span style="font-weight:400;color:var(--muted)">(PDF/Word, max 2,5 Mo)</span></label>
+        <div id="peCVZone"></div>
+        <input type="file" id="peCVFile" accept=".pdf,.doc,.docx" style="display:none" onchange="handleCV(this)">
+      </div></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" style="border:1px solid var(--line);flex:1;justify-content:center" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-primary" style="flex:1;justify-content:center" onclick="saveProfileForm()">💾 Enregistrer mon profil</button>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+  renderSkillsEditor();
+  renderCVZone();
+}
+function renderSkillsEditor(){
+  const el = document.getElementById('peSkills'); if(!el) return;
+  el.innerHTML = editorSkills.length
+    ? editorSkills.map((s,i)=>`<span class="chip">${s} <span class="x" onclick="removeSkill(${i})">✕</span></span>`).join('')
+    : `<span style="font-size:12px;color:var(--muted)">Aucune compétence ajoutée.</span>`;
+}
+function addSkill(){
+  const inp = document.getElementById('peSkillInput');
+  const v = (inp.value||'').trim();
+  if(!v) return;
+  if(editorSkills.length>=12){ toast('⚠️','12 compétences maximum'); return; }
+  if(!editorSkills.includes(v)) editorSkills.push(v);
+  inp.value='';
+  renderSkillsEditor();
+}
+function removeSkill(i){ editorSkills.splice(i,1); renderSkillsEditor(); }
+function renderCVZone(){
+  const el = document.getElementById('peCVZone'); if(!el) return;
+  const p = getProfile();
+  el.innerHTML = p.cv
+    ? `<div class="cv-file"><span class="ic">📄</span><div style="flex:1;min-width:0"><div class="nm">${p.cv.name}</div><div class="meta">Ajouté le ${p.cv.date} · ${(p.cv.size/1024).toFixed(0)} Ko</div></div>
+       <a class="btn btn-ghost btn-sm" style="border:1px solid var(--line)" href="${p.cv.data}" download="${p.cv.name}" title="Télécharger">⬇️</a>
+       <button class="btn btn-ghost btn-sm" style="border:1px solid var(--line)" onclick="document.getElementById('peCVFile').click()" title="Remplacer">🔄</button>
+       <button class="btn btn-ghost btn-sm" style="border:1px solid var(--line);color:var(--red)" onclick="removeCV()" title="Supprimer">🗑️</button></div>`
+    : `<div class="cv-zone" style="cursor:pointer" onclick="document.getElementById('peCVFile').click()">
+       <div style="font-size:30px;margin-bottom:6px">📎</div>
+       <div style="font-size:14px;font-weight:700;margin-bottom:2px">Cliquez pour déposer votre CV</div>
+       <div style="font-size:12px;color:var(--muted)">PDF ou Word · 2,5 Mo maximum</div></div>`;
+}
+function handleCV(input){
+  const f = input.files[0]; if(!f) return;
+  if(f.size > 2.5*1024*1024){ toast('⚠️','Fichier trop lourd : 2,5 Mo maximum'); input.value=''; return; }
+  const r = new FileReader();
+  r.onload = e => {
+    const p = getProfile();
+    p.cv = {name:f.name, size:f.size, date:todayFR(), data:e.target.result};
+    saveProfile(p);
+    renderCVZone();
+    toast('📎','CV « '+f.name+' » ajouté à votre profil !');
+  };
+  r.readAsDataURL(f);
+  input.value='';
+}
+function removeCV(){
+  const p = getProfile(); p.cv = null; saveProfile(p);
+  renderCVZone();
+  toast('🗑️','CV supprimé');
+}
+function saveProfileForm(){
+  const u = currentUser(); if(!u) return;
+  const accounts = DB.accounts();
+  accounts[u.email].prenom = document.getElementById('pePrenom').value.trim() || u.prenom;
+  accounts[u.email].nom = document.getElementById('peNom').value.trim() || u.nom;
+  DB.saveAccounts(accounts);
+  const p = getProfile();
+  p.phone = document.getElementById('pePhone').value.trim();
+  p.ville = document.getElementById('peVille').value.trim();
+  p.ecole = document.getElementById('peEcole').value.trim();
+  p.niveau = document.getElementById('peNiveau').value;
+  p.formation = document.getElementById('peFormation').value.trim();
+  p.about = document.getElementById('peAbout').value.trim();
+  p.skills = editorSkills.slice();
+  saveProfile(p);
+  closeModal(); updateNav(); renderStudent();
+  toast('✅','Profil enregistré ('+profileCompletion(p,currentUser())+' % complété)');
+}
+
+/* ===================== RECHERCHE & CANDIDATURE ===================== */
+function offerCard(o){
+  const u = currentUser();
+  const applied = u ? myApplications().some(a=>a.offerId===o.id) : false;
+  const saved = u ? mySaved().includes(o.id) : false;
+  const sm = o.src==='ap' ? null : SOURCE_META[o.src];
+  const srcBadge = sm
+    ? `<a class="source-badge ${sm.cls}" href="${sm.url(o.title,o.city)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 Vu sur ${sm.name}</a>`
+    : `<span class="source-badge src-ap">⭐ Publiée sur AlternaPro</span>`;
+  return `<div class="offer" onclick="openOffer(${o.id})">
+    <div class="offer-top">
+      ${logoHTML(o)}
+      <div class="offer-body">
+        <div class="offer-titlerow">
+          <div><h3>${o.title}</h3><div class="co"><b>${o.company}</b> · ${o.city}</div></div>
+          ${o.match?`<span class="match">${o.match}% match</span>`:''}
+        </div>
+        <div class="offer-meta">
+          <span class="ometa">📍 ${o.region||o.city}</span>
+          <span class="ometa">📝 ${o.contract}</span>
+          <span class="ometa">⏱️ ${o.duration} mois</span>
+          <span class="ometa">📅 ${o.start}</span>
+          <span class="ometa">${remoteEmoji[o.remote]||'🏢'} ${o.remote}</span>
+          <span class="ometa">🎓 ${LEVELS[o.level]||'Tous niveaux'} min.</span>
+        </div>
+        <div class="summary">${o.summary||''}</div>
+        <div class="sector-tags">
+          ${o.boosted?'<span class="badge b-purple">🚀 Sponsorisée</span>':''}
+          <span class="stag">${o.sector}</span>
+          ${srcBadge}
+        </div>
+      </div>
+    </div>
+    <div class="offer-foot">
+      <div class="salary">${o.salary} € / mois <span>${o.perks||''}</span></div>
+      <div class="offer-actions" onclick="event.stopPropagation()">
+        <button class="btn btn-ghost btn-sm" style="border:1px solid var(--line)" onclick="toggleSave(${o.id},this)">${saved?'❤️ Sauvegardée':'🤍 Sauvegarder'}</button>
+        ${o.careerUrl?`<a class="btn btn-ghost btn-sm" style="border:1px solid var(--line)" href="${o.careerUrl}" target="_blank" rel="noopener">🌐 Site recruteur</a>`:''}
+        <button class="btn ${applied?'btn-outline':'btn-primary'} btn-sm" onclick="applyOffer(${o.id},this)">${applied?'✓ Candidaté':'⚡ Postuler en 1 clic'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+function getFilteredOffers(){
+  const k = (document.getElementById('sKeyword').value||'').toLowerCase().trim();
+  const city = document.getElementById('sCity').value;
+  const sector = document.getElementById('sSector').value;
+  const contracts = [...document.querySelectorAll('.fContract:checked')].map(c=>c.value);
+  const remotes = [...document.querySelectorAll('.fRemote:checked')].map(c=>c.value);
+  const level = document.getElementById('fLevel').value;
+  const duration = document.getElementById('fDuration').value;
+  const salary = +document.getElementById('fSalary').value;
+  const sort = document.getElementById('sortBy').value;
+  let list = allOffers().filter(o=>{
+    if(k && !((o.title+o.company+o.sector+(o.summary||'')).toLowerCase().includes(k))) return false;
+    if(city && o.city!==city) return false;
+    if(sector && o.sector!==sector) return false;
+    if(!contracts.includes(o.contract)) return false;
+    if(!remotes.includes(o.remote)) return false;
+    if(level && o.level>+level) return false;
+    if(duration && o.duration!==+duration) return false;
+    if(o.salary<salary) return false;
+    return true;
+  });
+  if(sort==='salary') list.sort((a,b)=>b.salary-a.salary);
+  else if(sort==='recent') list.sort((a,b)=>b.id-a.id);
+  else list.sort((a,b)=>(b.match||0)-(a.match||0));
+  list.sort((a,b)=>(b.boosted?1:0)-(a.boosted?1:0));
+  return list;
+}
+function renderOffers(){
+  const el = document.getElementById('offerList'); if(!el) return;
+  const list = getFilteredOffers();
+  const city = document.getElementById('sCity').value;
+  document.getElementById('resCount').textContent = list.length;
+  document.getElementById('resCity').textContent = city||'toutes villes';
+  el.innerHTML = list.length ? list.map(offerCard).join('')
+    : `<div class="empty"><span class="em">🐸</span><b>La grenouille n'a rien trouvé…</b><br>Élargissez vos critères ou réinitialisez les filtres.</div>`;
+}
+function resetFilters(){
+  document.getElementById('sKeyword').value='';
+  document.getElementById('sCity').value='';
+  document.getElementById('sSector').value='';
+  document.getElementById('fLevel').value='';
+  document.getElementById('fDuration').value='';
+  document.getElementById('fSalary').value=0;
+  document.getElementById('salOut').textContent='0 €';
+  document.querySelectorAll('.fContract,.fRemote').forEach(c=>c.checked=true);
+  document.getElementById('sortBy').value='match';
+  renderOffers();
+  toast('↺','Filtres réinitialisés');
+}
+function applyOffer(id, btn){
+  const u = currentUser();
+  if(!u){ openAuth('signup','etudiant'); toast('🔑','Créez votre compte gratuit pour postuler en 1 clic'); return; }
+  if(u.role!=='etudiant'){ toast('⚠️','Seuls les comptes étudiants peuvent postuler'); return; }
+  const p = getProfile();
+  if(!p.cv){ openProfileEditor(); toast('📎','Ajoutez d\'abord votre CV pour postuler en 1 clic'); return; }
+  if(myApplications().some(a=>a.offerId===id)){ toast('ℹ️','Vous avez déjà postulé à cette offre'); return; }
+  const apps = DB.applications();
+  apps.push({offerId:id, email:u.email, date:todayFR()});
+  DB.saveApplications(apps);
+  if(btn){ btn.className='btn btn-outline btn-sm'; btn.textContent='✓ Candidaté'; }
+  const o = findOffer(id);
+  closeModal();
+  renderOffers();
+  toast('🎉','Candidature envoyée à '+(o?o.company:'l\'entreprise')+' avec votre CV !');
+}
+function toggleSave(id, btn){
+  const u = currentUser();
+  if(!u){ openAuth('signup','etudiant'); toast('🔑','Créez votre compte pour sauvegarder des offres'); return; }
+  if(u.role!=='etudiant'){ toast('⚠️','Réservé aux comptes étudiants'); return; }
+  let ids = mySaved();
+  if(ids.includes(id)){ ids = ids.filter(x=>x!==id); if(btn) btn.textContent='🤍 Sauvegarder'; toast('💔','Retirée des favoris'); }
+  else { ids.push(id); if(btn) btn.textContent='❤️ Sauvegardée'; toast('❤️','Ajoutée à vos favoris'); }
+  setMySaved(ids);
+}
+function openOffer(id){
+  const o = findOffer(id); if(!o) return;
+  const u = currentUser();
+  const applied = u ? myApplications().some(a=>a.offerId===id) : false;
+  const links = o.src==='ap' ? '' : `
+      <h4 style="font-size:15px;margin:18px 0 6px">🔗 Cette recherche sur les plateformes</h4>
+      <div class="src-links">${Object.keys(SOURCE_META).map(k=>{const sm=SOURCE_META[k];return `<a class="src-link" href="${sm.url(o.title,o.city)}" target="_blank" rel="noopener">🔗 ${sm.name}</a>`;}).join('')}</div>`;
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-head">
+      <div style="display:flex;gap:13px;align-items:center">${logoHTML(o,'width:50px;height:50px;font-size:15px')}
+      <div><h3 style="font-size:19px">${o.title}</h3><div style="color:var(--muted);font-size:14px"><b style="color:var(--indigo-d)">${o.company}</b> · ${o.city}</div></div></div>
+      <button class="modal-x" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+        ${o.match?`<span class="match">${o.match}% de compatibilité</span>`:''}
+        <span class="badge b-purple">${o.sector}</span>
+        <span class="badge b-gray">${remoteEmoji[o.remote]||'🏢'} ${o.remote}</span>
+        ${o.boosted?'<span class="badge b-purple">🚀 Sponsorisée</span>':''}
+      </div>
+      <div class="detail-row"><span class="k">💰 Rémunération</span><span><b>${o.salary} € brut / mois</b> ${o.perks||''}</span></div>
+      <div class="detail-row"><span class="k">📝 Contrat</span><span>${o.contract} · ${o.duration} mois</span></div>
+      <div class="detail-row"><span class="k">📅 Début</span><span>${o.start}</span></div>
+      <div class="detail-row"><span class="k">🎓 Niveau requis</span><span>${LEVELS[o.level]||'Tous niveaux'} minimum</span></div>
+      <div class="detail-row"><span class="k">📍 Localisation</span><span>${o.city}${o.region?', '+o.region:''}</span></div>
+      ${o.missions&&o.missions.length?`<h4 style="font-size:15px;margin:18px 0 4px">🎯 Missions</h4><ul class="detail-list">${o.missions.map(m=>`<li>${m}</li>`).join('')}</ul>`:''}
+      ${o.profile&&o.profile.length?`<h4 style="font-size:15px;margin:18px 0 4px">👤 Profil recherché</h4><ul class="detail-list">${o.profile.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+      ${links}
+    </div>
+    <div class="modal-foot">
+      ${o.careerUrl?`<a class="btn btn-outline" href="${o.careerUrl}" target="_blank" rel="noopener" style="flex:1;justify-content:center">🌐 Site carrière</a>`:''}
+      <button class="btn ${applied?'btn-outline':'btn-primary'}" style="flex:1;justify-content:center" onclick="applyOffer(${o.id})">${applied?'✓ Déjà candidaté':'⚡ Postuler en 1 clic'}</button>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+}
+
+/* ===================== ESPACE RECRUTEUR ===================== */
+function myOffers(){
+  const u = currentUser(); if(!u) return [];
+  return DB.customOffers().filter(o=>o.owner===u.email);
+}
+function renderRecruiter(){
+  const root = document.getElementById('recruiterRoot');
+  const u = currentUser();
+  if(!u || u.role!=='recruteur'){
+    root.innerHTML = gateHTML('🏢','Espace recruteur',"Créez votre compte entreprise gratuit : publication d'offres illimitée, 0 € d'abonnement. Vous ne payez que pour booster une offre (19 €).",'recruteur');
+    return;
+  }
+  const offers = myOffers();
+  const apps = DB.applications().filter(a=>offers.some(o=>o.id===a.offerId));
+  const accounts = DB.accounts();
+  const profiles = DB.profiles();
+
+  const offersHTML = offers.length ? offers.slice().reverse().map(o=>{
+    const nApps = DB.applications().filter(a=>a.offerId===o.id).length;
+    return `<div class="row-item"><div class="row-main"><div class="row-title">${o.title} ${o.boosted?'<span class="badge b-purple">🚀 Boostée</span>':''}</div><div class="row-sub">${o.city} · ${o.contract} · ${o.salary} €/mois · publiée le ${o.published}</div>
+      <div style="margin-top:7px;display:flex;gap:6px;flex-wrap:wrap">${o.boosted?'<span style="font-size:12px;color:var(--indigo-d);font-weight:600">En tête des résultats · 30 j</span>':`<button class="btn btn-ghost btn-sm" style="border:1px solid var(--line)" onclick="openBoost(${o.id})">🚀 Booster · 19 €</button>`}
+      <button class="btn btn-ghost btn-sm" style="border:1px solid var(--line);color:var(--red)" onclick="deleteOffer(${o.id})">🗑️ Retirer</button></div></div>
+      <div style="text-align:right"><span class="badge ${nApps?'b-green':'b-gray'}">${nApps} candidature${nApps>1?'s':''}</span></div></div>`;
+  }).join('') : `<div class="empty"><span class="em">📢</span><b>Aucune offre publiée</b><br>Publiez votre première offre gratuitement — elle apparaîtra dans la recherche.</div>`;
+
+  const appsHTML = apps.length ? apps.slice().reverse().map(a=>{
+    const o = findOffer(a.offerId);
+    const cand = accounts[a.email]||{};
+    const cp = profiles[a.email]||{};
+    return `<div class="row-item"><div class="avatar">${initials(cand.prenom,cand.nom)}</div>
+      <div class="row-main"><div class="row-title">${cand.prenom||'?'} ${cand.nom||''}</div>
+      <div class="row-sub">${o?o.title:'Offre supprimée'} · le ${a.date}${cp.formation?' · '+cp.formation:''}</div>
+      ${cp.skills&&cp.skills.length?`<div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap">${cp.skills.slice(0,4).map(s=>`<span class="badge b-gray">${s}</span>`).join('')}</div>`:''}</div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+        ${cp.cv?`<a class="btn btn-primary btn-sm" href="${cp.cv.data}" download="${cp.cv.name}">📄 Télécharger le CV</a>`:'<span class="badge b-gray">Pas de CV</span>'}
+        <span style="font-size:12px;color:var(--muted)">${a.email}</span>
+      </div></div>`;
+  }).join('') : `<div class="empty"><span class="em">📭</span><b>Aucune candidature reçue</b><br>Les candidatures sur vos offres apparaîtront ici, avec le CV téléchargeable.</div>`;
+
+  root.innerHTML = `
+  <div class="app">
+    <aside class="sidebar" id="sb-recruiter">
+      <div class="side-user"><div class="avatar">${initials(u.orgName, u.orgName.split(' ')[1]||u.orgName[1]||'')}</div><div><div class="nm">${u.orgName}</div><div class="rl">Compte recruteur · 0 €</div></div></div>
+      <div class="side-label">Navigation</div>
+      <div class="side-item active"><span class="em">📊</span> Tableau de bord</div>
+      <div class="side-item" onclick="openPublish()"><span class="em">＋</span> Publier une offre</div>
+      <div class="side-item" onclick="go('search',navEl('search'))"><span class="em">🔍</span> Voir la recherche</div>
+      <div class="side-item" onclick="go('fiche',navEl('fiche'))"><span class="em">📄</span> Fiche de mission</div>
+      <div class="side-label">Compte</div>
+      <div class="side-item" onclick="logout()"><span class="em">🚪</span> Déconnexion</div>
+    </aside>
+    <div class="main">
+      <div class="main-head">
+        <div><h1>${u.orgName} 🏢</h1><div class="sub">Espace recruteur — ${todayFR()}</div></div>
+        <button class="btn btn-primary" onclick="openPublish()">＋ Publier une offre gratuite</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="n">${offers.length}</div><div class="l">Offres en ligne</div></div>
+        <div class="kpi"><div class="n">${apps.length}</div><div class="l">Candidatures reçues</div></div>
+        <div class="kpi"><div class="n">${offers.filter(o=>o.boosted).length}</div><div class="l">Offres boostées</div></div>
+        <div class="kpi"><div class="n">0 €</div><div class="l">Abonnement mensuel</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Mes offres</h3><span class="link" onclick="openPublish()">＋ Nouvelle offre</span></div>
+        ${offersHTML}
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Candidatures reçues</h3></div>
+        ${appsHTML}
+      </div>
+    </div>
+  </div>`;
+}
+function openPublish(){
+  const u = currentUser();
+  if(!u || u.role!=='recruteur'){ openAuth('signup','recruteur'); toast('🔑','Créez votre compte recruteur gratuit pour publier'); return; }
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-head"><h3>Publier une offre — gratuit</h3><button class="modal-x" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row full"><div><label class="flabel">Intitulé du poste *</label><input class="finput" id="pubTitle" placeholder="Ex : Alternant(e) Marketing Digital"></div></div>
+      <div class="form-row"><div><label class="flabel">Ville *</label><input class="finput" id="pubCity" placeholder="Ex : Lyon"></div><div><label class="flabel">Secteur</label>
+        <select class="finput" id="pubSector">
+          <option>Marketing & Communication</option><option>Commerce & Vente</option><option>Informatique & Tech</option><option>Finance & Banque</option><option>RH & Management</option><option>Logistique</option><option>Autre</option>
+        </select></div></div>
+      <div class="form-row"><div><label class="flabel">Type de contrat</label><select class="finput" id="pubContract"><option>Apprentissage</option><option>Professionnalisation</option></select></div>
+        <div><label class="flabel">Durée</label><select class="finput" id="pubDuration"><option value="12">12 mois</option><option value="24">24 mois</option></select></div></div>
+      <div class="form-row"><div><label class="flabel">Salaire mensuel (€) *</label><input class="finput" type="number" id="pubSalary" placeholder="1100"></div>
+        <div><label class="flabel">Date de début</label><input class="finput" id="pubStart" placeholder="Ex : Sept. 2026"></div></div>
+      <div class="form-row"><div><label class="flabel">Niveau requis</label><select class="finput" id="pubLevel"><option value="2">BAC+2</option><option value="3">BAC+3</option><option value="4">BAC+4</option><option value="5">BAC+5</option></select></div>
+        <div><label class="flabel">Présence</label><select class="finput" id="pubRemote"><option>Présentiel</option><option>Hybride</option><option>Télétravail</option></select></div></div>
+      <div class="form-row full"><div><label class="flabel">Lien vers votre site carrière <span style="font-weight:400;color:var(--muted)">(optionnel)</span></label><input class="finput" id="pubCareerUrl" placeholder="https://votre-site.fr/carrieres"></div></div>
+      <div class="form-row full"><div><label class="flabel">Description du poste *</label><textarea class="finput" id="pubDesc" rows="3" placeholder="Décrivez le poste et les missions..."></textarea></div></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" style="border:1px solid var(--line);flex:1;justify-content:center" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-primary" style="flex:1;justify-content:center" onclick="publishOffer()">📢 Publier gratuitement</button>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+}
+function publishOffer(){
+  const u = currentUser(); if(!u) return;
+  const title = document.getElementById('pubTitle').value.trim();
+  const city = document.getElementById('pubCity').value.trim();
+  const salary = +document.getElementById('pubSalary').value;
+  const desc = document.getElementById('pubDesc').value.trim();
+  if(!title || !city || !salary || !desc){ toast('⚠️','Remplissez les champs obligatoires (*)'); return; }
+  let url = document.getElementById('pubCareerUrl').value.trim();
+  if(url && !url.startsWith('http')) url = 'https://'+url;
+  const offers = DB.customOffers();
+  const id = 1000 + offers.length + Math.floor(Math.random()*1000);
+  offers.push({
+    id, owner:u.email, title, company:u.orgName,
+    logo: initials(u.orgName, u.orgName.split(' ')[1]||u.orgName[1]||''),
+    sector: document.getElementById('pubSector').value,
+    city, region:'', contract: document.getElementById('pubContract').value,
+    duration: +document.getElementById('pubDuration').value,
+    start: document.getElementById('pubStart').value.trim()||'Dès que possible',
+    remote: document.getElementById('pubRemote').value,
+    level: +document.getElementById('pubLevel').value,
+    salary, perks:'', match:null, src:'ap', careerUrl:url||null,
+    summary: desc, missions:[], profile:[], boosted:false, published: todayFR()
+  });
+  DB.saveCustomOffers(offers);
+  closeModal(); populateFilters(); renderOffers(); renderRecruiter(); refreshStats();
+  toast('📢','Offre publiée gratuitement ! Elle est visible dans la recherche.');
+}
+function deleteOffer(id){
+  DB.saveCustomOffers(DB.customOffers().filter(o=>o.id!==id));
+  populateFilters(); renderOffers(); renderRecruiter(); refreshStats();
+  toast('🗑️','Offre retirée');
+}
+function openBoost(id){
+  const o = findOffer(id); if(!o) return;
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-head"><h3>🚀 Booster cette offre</h3><button class="modal-x" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <p style="font-size:15px;font-weight:700;margin-bottom:14px">${o.title}</p>
+      <div class="detail-row"><span class="k">Visibilité</span><span>En tête des résultats + badge 🚀 Sponsorisée</span></div>
+      <div class="detail-row"><span class="k">Durée</span><span>30 jours</span></div>
+      <div class="detail-row"><span class="k">Prix</span><span><b>19 € — paiement unique</b>, sans abonnement</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:14px">Pas de budget au clic, pas d'engagement : vous payez une fois, votre offre reste en tête pendant 30 jours.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" style="border:1px solid var(--line);flex:1;justify-content:center" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-primary" style="flex:1;justify-content:center" onclick="confirmBoost(${id})">💳 Payer 19 € et booster</button>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+}
+function confirmBoost(id){
+  const offers = DB.customOffers();
+  const o = offers.find(x=>x.id===id);
+  if(o){ o.boosted = true; DB.saveCustomOffers(offers); }
+  closeModal(); renderOffers(); renderRecruiter();
+  toast('🚀','Offre boostée ! Elle apparaît en tête des résultats pendant 30 jours.');
+}
+
+/* ===================== ESPACE ÉCOLE ===================== */
+function renderSchool(){
+  const root = document.getElementById('schoolRoot');
+  const u = currentUser();
+  if(!u || u.role!=='ecole'){
+    root.innerHTML = gateHTML('🏫','Espace école / CFA',"Créez le compte gratuit de votre établissement : suivez vos étudiants inscrits et validez les fiches de mission en ligne.",'ecole');
+    return;
+  }
+  const fiches = DB.fiches();
+  const pending = fiches.filter(f=>f.status==='pending');
+  const accounts = Object.values(DB.accounts());
+  const students = accounts.filter(a=>a.role==='etudiant');
+  const recruiters = accounts.filter(a=>a.role==='recruteur');
+  const profiles = DB.profiles();
+  const apps = DB.applications();
+
+  const fichesHTML = fiches.length ? fiches.slice().reverse().map(f=>{
+    const i = fiches.indexOf(f);
+    return `<div class="row-item"><div class="clogo">${initials(f.student.split(' ')[0]||'?', f.student.split(' ')[1]||'?')}</div>
+      <div class="row-main"><div class="row-title">${f.student} · ${f.company}</div><div class="row-sub">${f.post} · Réf. ${f.ref} · reçue le ${f.date}</div></div>
+      ${f.status==='validated' ? '<span class="badge b-green">✓ Validée</span>'
+        : `<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><button class="btn btn-ghost btn-sm" style="border:1px solid var(--line)" onclick="go('fiche',navEl('fiche'))">Voir</button><button class="btn btn-primary btn-sm" onclick="validateFiche(${i})">✓ Valider</button></div>`}</div>`;
+  }).join('') : `<div class="empty"><span class="em">📄</span><b>Aucune fiche reçue</b><br>Les fiches de mission envoyées depuis l'éditeur apparaîtront ici pour validation.</div>`;
+
+  const studentsHTML = students.length ? students.map(s=>{
+    const sp = profiles[s.email]||{};
+    const n = apps.filter(a=>a.email===s.email).length;
+    const status = sp.cv ? (n>0?`<span class="badge b-blue">${n} candidature${n>1?'s':''}</span>`:'<span class="badge b-green">Profil complet</span>') : '<span class="badge b-orange">CV manquant</span>';
+    return `<div class="row-item"><div class="avatar">${initials(s.prenom,s.nom)}</div><div class="row-main"><div class="row-title">${s.prenom} ${s.nom}</div><div class="row-sub">${sp.formation||'Formation non renseignée'}${sp.ecole?' · '+sp.ecole:''}</div></div>${status}</div>`;
+  }).join('') : `<div class="empty"><span class="em">👥</span><b>Aucun étudiant inscrit</b><br>Les étudiants qui créent un compte apparaîtront ici.</div>`;
+
+  root.innerHTML = `
+  <div class="app">
+    <aside class="sidebar" id="sb-school">
+      <div class="side-user"><div class="avatar">${initials(u.orgName, u.orgName.split(' ')[1]||u.orgName[1]||'')}</div><div><div class="nm">${u.orgName}</div><div class="rl">Espace école · Gratuit</div></div></div>
+      <div class="side-label">Navigation</div>
+      <div class="side-item active"><span class="em">📊</span> Tableau de bord</div>
+      <div class="side-item" onclick="go('fiche',navEl('fiche'))"><span class="em">📄</span> Éditeur de fiche</div>
+      <div class="side-item" onclick="go('search',navEl('search'))"><span class="em">🔍</span> Voir les offres</div>
+      <div class="side-label">Compte</div>
+      <div class="side-item" onclick="logout()"><span class="em">🚪</span> Déconnexion</div>
+    </aside>
+    <div class="main">
+      <div class="main-head">
+        <div><h1>${u.orgName} 🎓</h1><div class="sub">Espace école — ${todayFR()}</div></div>
+        <button class="btn btn-primary" onclick="go('fiche',navEl('fiche'))">📄 Ouvrir l'éditeur de fiche</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="n">${students.length}</div><div class="l">Étudiants inscrits</div></div>
+        <div class="kpi"><div class="n">${pending.length}</div><div class="l">Fiches à valider</div></div>
+        <div class="kpi"><div class="n">${fiches.filter(f=>f.status==='validated').length}</div><div class="l">Fiches validées</div></div>
+        <div class="kpi"><div class="n">${recruiters.length}</div><div class="l">Entreprises inscrites</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Fiches de mission reçues</h3></div>
+        ${fichesHTML}
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Étudiants inscrits sur la plateforme</h3></div>
+        ${studentsHTML}
+      </div>
+    </div>
+  </div>`;
+}
+function validateFiche(i){
+  const fiches = DB.fiches();
+  if(!fiches[i]) return;
+  fiches[i].status = 'validated';
+  DB.saveFiches(fiches);
+  renderSchool();
+  toast('🎓','Fiche de '+fiches[i].student+' validée !');
+}
+
+/* ===================== FICHE DE MISSION ===================== */
+let ficheSigs = {ent:false, eco:false, etu:false};
+function prefillFiche(){
+  const u = currentUser();
+  if(u && u.role==='etudiant'){
+    const p = getProfile();
+    const set = (id,v)=>{ const e=document.getElementById(id); if(e && !e.value) e.value=v||''; };
+    set('fEtuPrenom',u.prenom); set('fEtuNom',u.nom); set('fEtuEmail',u.email); set('fEtuTel',p.phone);
+    set('fEcoNom',p.ecole); set('fEcoFormation',p.formation);
+    document.getElementById('fEtuHint').textContent = 'Pré-rempli depuis votre profil ✓';
+  }
+  if(u && u.role==='recruteur'){
+    const set = (id,v)=>{ const e=document.getElementById(id); if(e && !e.value) e.value=v||''; };
+    set('fEntNom',u.orgName); set('fEntMaitre',u.prenom+' '+u.nom);
+  }
+  if(u && u.role==='ecole'){
+    const set = (id,v)=>{ const e=document.getElementById(id); if(e && !e.value) e.value=v||''; };
+    set('fEcoNom',u.orgName); set('fEcoRef',u.prenom+' '+u.nom);
+  }
+  const draft = dbGet('ap_fichedraft',null);
+  if(draft){ Object.keys(draft).forEach(id=>{ const e=document.getElementById(id); if(e && !e.value) e.value=draft[id]; }); }
+}
+const FICHE_FIELDS = ['fEntNom','fEntSiret','fEntAdr','fEntMaitre','fEntPoste','fEntSalaire','fEntDates','fEntMissions','fEcoNom','fEcoRef','fEcoFormation','fEcoRythme','fEtuPrenom','fEtuNom','fEtuEmail','fEtuTel','fEtuNaissance','fEtuDiplome'];
+function saveFicheDraft(){
+  const d = {};
+  FICHE_FIELDS.forEach(id=>{ const e=document.getElementById(id); if(e) d[id]=e.value; });
+  dbSet('ap_fichedraft', d);
+  toast('💾','Brouillon enregistré dans votre navigateur');
+}
+function signFiche(who){
+  const names = {
+    ent: document.getElementById('fEntMaitre').value.trim() || 'Représentant entreprise',
+    eco: document.getElementById('fEcoRef').value.trim() || 'Référent pédagogique',
+    etu: (document.getElementById('fEtuPrenom').value+' '+document.getElementById('fEtuNom').value).trim() || 'Étudiant(e)',
+  };
+  ficheSigs[who] = true;
+  const pad = document.getElementById('pad-'+who);
+  pad.classList.add('signed');
+  pad.innerHTML = `<span class="sgn">${names[who]}</span><span style="font-size:11px">✅ Signé le ${todayFR()}</span>`;
+  const btn = document.getElementById('btn-'+who);
+  btn.disabled = true; btn.className='btn btn-outline btn-sm btn-block'; btn.textContent='✓ Signé';
+  const n = Object.values(ficheSigs).filter(Boolean).length;
+  const st = document.getElementById('sigStatus');
+  st.textContent = n+'/3 signé'+(n>1?'s':'');
+  st.className = 'badge ' + (n===3?'b-green':n===2?'b-blue':'b-orange');
+  document.getElementById('fstep1').classList.add('done');
+  document.getElementById('fstep2').classList.add(n===3?'done':'active');
+  if(n===3){
+    document.getElementById('fstep3').classList.add('active');
+    document.getElementById('ficheStatus').className='badge b-blue';
+    document.getElementById('ficheStatus').textContent='✍️ Signée — prête à envoyer';
+    toast('🎉','Les 3 parties ont signé ! Envoyez la fiche à l\'école.');
+  } else {
+    toast('✍️', names[who]+' a signé la fiche');
+  }
+}
+function submitFiche(){
+  const n = Object.values(ficheSigs).filter(Boolean).length;
+  if(n<3){ toast('⚠️','Les 3 signatures sont requises avant l\'envoi'); return; }
+  const student = (document.getElementById('fEtuPrenom').value+' '+document.getElementById('fEtuNom').value).trim();
+  const company = document.getElementById('fEntNom').value.trim();
+  const post = document.getElementById('fEntPoste').value.trim();
+  if(!student || !company || !post){ toast('⚠️','Renseignez au minimum : étudiant, entreprise et intitulé du poste'); return; }
+  const fiches = DB.fiches();
+  const ref = 'FDM-2026-'+String(800+fiches.length+1).padStart(5,'0');
+  fiches.push({ref, student, company, post, status:'pending', date:todayFR()});
+  DB.saveFiches(fiches);
+  localStorage.removeItem('ap_fichedraft');
+  document.getElementById('fstep3').classList.add('done');
+  document.getElementById('ficheStatus').className='badge b-green';
+  document.getElementById('ficheStatus').textContent='📤 Envoyée à l\'école';
+  toast('🎓','Fiche '+ref+' envoyée à l\'école pour validation !');
+}
+function exportPDF(){ toast('🖨️','Ouverture de l\'aperçu PDF — choisissez « Enregistrer en PDF »'); setTimeout(()=>window.print(),500); }
+
+/* ===================== MODAL / TOAST ===================== */
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+document.getElementById('overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') closeModal(); });
+function toast(emoji, msg){
+  const t = document.createElement('div');
+  t.className='toast';
+  t.innerHTML = `<span class="em">${emoji}</span><span>${msg}</span>`;
+  document.getElementById('toasts').appendChild(t);
+  setTimeout(()=>{ t.style.transition='.3s'; t.style.opacity='0'; t.style.transform='translateX(120%)'; setTimeout(()=>t.remove(),300); }, 3200);
+}
+
+/* ===================== INIT ===================== */
+function populateFilters(){
+  const cities = [...new Set(allOffers().map(o=>o.city))].sort();
+  const sel = document.getElementById('sCity');
+  const curCity = sel.value;
+  sel.innerHTML = '<option value="">Toutes les villes</option>' + cities.map(c=>`<option value="${c}">${c}</option>`).join('');
+  sel.value = curCity;
+  const sectors = [...new Set(allOffers().map(o=>o.sector))].sort();
+  const ss = document.getElementById('sSector');
+  const cur = ss.value;
+  ss.innerHTML = '<option value="">Tous les secteurs</option>' + sectors.map(s=>`<option value="${s}">${s}</option>`).join('');
+  ss.value = cur;
+}
+function init(){
+  populateFilters();
+  updateNav();
+  renderOffers();
+  renderStudent(); renderRecruiter(); renderSchool();
+}
+init();
+</script>
+</body>
+</html>
