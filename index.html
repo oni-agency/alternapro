@@ -200,9 +200,13 @@ button{font-family:inherit;cursor:pointer}
 .sh-sub b{color:var(--indigo-d)}
 .sh-bar{max-width:780px;margin:0 auto 16px}
 .b-wrap{position:relative;display:inline-block}
-.frog-hug{position:absolute;width:38px;height:auto;left:-5px;top:-29px;transform-origin:50% 100%;animation:frogIdle 3.2s ease-in-out infinite;pointer-events:none}
-@keyframes frogIdle{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.93) scaleX(1.04)}}
-@media(max-width:760px){.frog-hug{width:27px;left:-4px;top:-20px}}
+.frog-hug{position:absolute;width:30px;height:auto;left:-16px;top:-5px;transform-origin:49% 10%;animation:frogSway 4.8s ease-in-out infinite;pointer-events:none}
+@keyframes frogSway{0%,100%{transform:rotate(2.5deg)}50%{transform:rotate(-3deg)}}
+.frog-hug .legs{transform-box:fill-box;transform-origin:50% 8%;animation:legKick 3.6s ease-in-out infinite}
+@keyframes legKick{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(4deg)}}
+.frog-hug .eye{transform-box:fill-box;transform-origin:center;animation:blink 5.2s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}94%,96%{transform:scaleY(.12)}}
+@media(max-width:760px){.frog-hug{width:21px;left:-11px;top:-3px}}
 .float-card{position:absolute;z-index:1;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);padding:12px 16px;font-size:13px;font-weight:700;text-align:left;line-height:1.45;pointer-events:none}
 .float-card span{display:block;font-weight:500;color:var(--muted);font-size:12px}
 .fc-left{left:3.5%;top:44%;transform:rotate(-4deg);animation:floaty 5.5s ease-in-out infinite}
@@ -219,7 +223,7 @@ button{font-family:inherit;cursor:pointer}
 .rise{animation:riseIn .6s ease both}
 .d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}.d4{animation-delay:.34s}
 @keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion: reduce){.frog-hug,.float-card,.rise{animation:none}}
+@media (prefers-reduced-motion: reduce){.frog-hug,.frog-hug .legs,.frog-hug .eye,.float-card,.rise{animation:none}}
 .searchbar{display:flex;gap:10px;flex-wrap:wrap}
 .searchbar .field{flex:1;min-width:160px;position:relative}
 .searchbar .field .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.6}
@@ -395,7 +399,7 @@ button{font-family:inherit;cursor:pointer}
     <div class="float-card fc-left" aria-hidden="true">⚡ Candidature en 1 clic<span>CV joint automatiquement</span></div>
     <div class="float-card fc-right" aria-hidden="true">📄 Fiche de mission<span>signée en ligne par les 3 parties</span></div>
     <div class="container">
-      <h1 class="rise"><span class="b-wrap">B<svg class="frog-hug" viewBox="0 0 100 78" aria-hidden="true"><ellipse cx="22" cy="58" rx="16" ry="13" fill="#22c55e"/><ellipse cx="78" cy="58" rx="16" ry="13" fill="#22c55e"/><g fill="#22c55e"><ellipse cx="12" cy="68" rx="5" ry="3.4"/><ellipse cx="18" cy="70" rx="5" ry="3.4"/><ellipse cx="88" cy="68" rx="5" ry="3.4"/><ellipse cx="82" cy="70" rx="5" ry="3.4"/></g><ellipse cx="50" cy="48" rx="30" ry="26" fill="#4ade80"/><ellipse cx="50" cy="59" rx="17" ry="12" fill="#d1fae5"/><path d="M40 62 L40 72" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/><path d="M60 62 L60 72" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/><g fill="#22c55e"><ellipse cx="34" cy="73" rx="4" ry="3"/><ellipse cx="40" cy="74.5" rx="4" ry="3"/><ellipse cx="46" cy="73" rx="4" ry="3"/><ellipse cx="54" cy="73" rx="4" ry="3"/><ellipse cx="60" cy="74.5" rx="4" ry="3"/><ellipse cx="66" cy="73" rx="4" ry="3"/></g><circle cx="35" cy="22" r="11" fill="#4ade80"/><circle cx="65" cy="22" r="11" fill="#4ade80"/><circle cx="35" cy="21" r="6.5" fill="#fff"/><circle cx="36.5" cy="21.5" r="3" fill="#1f2937"/><circle cx="35.4" cy="19.9" r="1.1" fill="#fff"/><circle cx="65" cy="21" r="6.5" fill="#fff"/><circle cx="63.5" cy="21.5" r="3" fill="#1f2937"/><circle cx="64.6" cy="19.9" r="1.1" fill="#fff"/><path d="M38 44 Q50 52 62 44" stroke="#166534" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="27" cy="42" r="4" fill="#fb7185" opacity=".7"/><circle cx="73" cy="42" r="4" fill="#fb7185" opacity=".7"/></svg></span>ondissez vers votre <span class="hl">alternance</span></h1>
+      <h1 class="rise"><span class="b-wrap">B<svg class="frog-hug" viewBox="0 0 90 140" aria-hidden="true"><path d="M30 16 C26 40 30 64 38 78" stroke="#22c55e" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M58 16 C62 40 58 64 50 78" stroke="#22c55e" stroke-width="7" fill="none" stroke-linecap="round"/><g class="legs"><path d="M36 100 C28 112 24 120 23 128" stroke="#22c55e" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M52 100 C58 110 60 118 57 128" stroke="#22c55e" stroke-width="7" fill="none" stroke-linecap="round"/><g fill="#22c55e"><ellipse cx="17" cy="130" rx="4" ry="2.8"/><ellipse cx="22" cy="132" rx="4" ry="2.8"/><ellipse cx="27" cy="130" rx="4" ry="2.8"/><ellipse cx="52" cy="131" rx="4" ry="2.8"/><ellipse cx="57" cy="133" rx="4" ry="2.8"/><ellipse cx="62" cy="131" rx="4" ry="2.8"/></g></g><ellipse cx="44" cy="88" rx="16" ry="15" fill="#4ade80"/><ellipse cx="44" cy="91" rx="10" ry="9.5" fill="#d1fae5"/><circle cx="32" cy="42" r="9" fill="#4ade80"/><circle cx="56" cy="42" r="9" fill="#4ade80"/><ellipse cx="44" cy="56" rx="23" ry="18" fill="#4ade80"/><g class="eye"><circle cx="32" cy="41" r="5.5" fill="#fff"/><circle cx="33.5" cy="42" r="2.6" fill="#1f2937"/><circle cx="32.6" cy="40.2" r="1" fill="#fff"/></g><g class="eye"><circle cx="56" cy="41" r="5.5" fill="#fff"/><circle cx="54.5" cy="42" r="2.6" fill="#1f2937"/><circle cx="55.6" cy="40.2" r="1" fill="#fff"/></g><path d="M35 63 Q44 70 53 63" stroke="#166534" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="26" cy="62" r="3.2" fill="#fb7185" opacity=".7"/><circle cx="62" cy="62" r="3.2" fill="#fb7185" opacity=".7"/><ellipse cx="30" cy="12" rx="7" ry="5" fill="#4ade80"/><ellipse cx="58" cy="12" rx="7" ry="5" fill="#4ade80"/><g fill="#4ade80"><ellipse cx="25" cy="17" rx="2.6" ry="4.2"/><ellipse cx="30" cy="18.5" rx="2.6" ry="4.2"/><ellipse cx="35" cy="17" rx="2.6" ry="4.2"/><ellipse cx="53" cy="17" rx="2.6" ry="4.2"/><ellipse cx="58" cy="18.5" rx="2.6" ry="4.2"/><ellipse cx="63" cy="17" rx="2.6" ry="4.2"/></g></svg></span>ondissez vers votre <span class="hl">alternance</span></h1>
       <div class="sh-sub rise d1"><b id="statOffers">—</b> offres en ligne · <b id="statCompanies">—</b> entreprises · <b id="statStudents">—</b> candidats inscrits · gratuit pour postuler</div>
       <div class="searchbar sh-bar rise d2">
         <div class="field"><span class="ic">🔍</span><input type="text" id="sKeyword" placeholder="Métier, compétence, entreprise..." oninput="renderOffers()"></div>
